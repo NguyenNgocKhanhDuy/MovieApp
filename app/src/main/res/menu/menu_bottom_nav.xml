@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/action_home" android:icon="@drawable/home" android:title=""/>
-    <item android:id="@+id/action_movie" android:icon="@drawable/play" android:title=""/>
-    <item android:id="@+id/action_user" android:icon="@drawable/user" android:title=""/>
+    <item
+        android:id="@+id/action_home"
+        android:icon="@drawable/home"
+        android:title="@string/action_home"
+        />
+    <item
+        android:id="@+id/action_movie"
+        android:icon="@drawable/play"
+        android:title="@string/action_movie"
+        />
+    <item
+        android:id="@+id/action_user"
+        android:icon="@drawable/user"
+        android:title="@string/action_user"
+        />
 
 </menu>
