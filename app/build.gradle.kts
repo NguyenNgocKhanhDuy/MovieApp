@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.movieapp"
-        minSdk = 19
+        minSdk = 21
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -34,6 +34,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
+    implementation(libs.media3.datasource)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -41,4 +42,12 @@ dependencies {
     implementation ("com.google.code.gson:gson:2.11.0")
     implementation ("com.squareup.retrofit2:retrofit:2.11.0")
     implementation ("com.squareup.retrofit2:converter-gson:2.11.0")
+
+    implementation ("com.google.android.exoplayer:exoplayer:2.16.1")
+    implementation ("com.google.android.exoplayer:exoplayer-hls:2.16.1")
+
+
+
+
+
 }

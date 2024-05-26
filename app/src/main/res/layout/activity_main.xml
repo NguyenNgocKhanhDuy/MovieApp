@@ -24,12 +24,9 @@
         android:layout_marginRight="10px"
         android:layout_marginLeft="10px"/>
 
-    <TextView
-        android:id="@+id/tvPage"
+    <com.google.android.exoplayer2.ui.PlayerView
+        android:id="@+id/video"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="..."
-        android:layout_marginRight="10px"
-        android:layout_marginLeft="10px"/>
+        android:layout_height="match_parent"/>
 
 </LinearLayout>
