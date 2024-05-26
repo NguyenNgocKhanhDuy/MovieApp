@@ -43,8 +43,13 @@ dependencies {
     implementation ("com.squareup.retrofit2:retrofit:2.11.0")
     implementation ("com.squareup.retrofit2:converter-gson:2.11.0")
 
+
+    // google navigationbar
+    implementation ("com.google.android.material:material:1.4.0")
+
     implementation ("com.google.android.exoplayer:exoplayer:2.16.1")
     implementation ("com.google.android.exoplayer:exoplayer-hls:2.16.1")
+
 
 
 

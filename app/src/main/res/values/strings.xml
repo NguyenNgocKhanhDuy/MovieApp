@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">MovieApp</string>
+    <string name="action_home">HOME</string>
+    <string name="action_movie">MOVIE</string>
+    <string name="action_user">ACCOUNT</string>
+
+
 </resources>

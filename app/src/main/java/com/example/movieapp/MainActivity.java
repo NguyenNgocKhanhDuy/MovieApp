@@ -1,14 +1,18 @@
 package com.example.movieapp;
 
 import android.annotation.SuppressLint;
+import android.content.ClipData;
+import android.media.RouteListingPreference;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -23,6 +27,7 @@ import com.google.android.exoplayer2.source.hls.HlsMediaSource;
 import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource;
 import com.google.android.exoplayer2.util.Util;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 import retrofit2.Call;
@@ -42,33 +47,49 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        btn = findViewById(R.id.btn);
-        tv1 = findViewById(R.id.tvItem);
+//        btn = findViewById(R.id.btn);
+//        tv1 = findViewById(R.id.tvItem);
 
-        playerView = findViewById(R.id.video);
-        player = new ExoPlayer.Builder(this).build();
-        playerView.setPlayer(player);
+//        playerView = findViewById(R.id.video);
+//        player = new ExoPlayer.Builder(this).build();
+//        playerView.setPlayer(player);
 
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                clickCallAPI();
-            }
-        });
+//        btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                clickCallAPI();
+//            }
+//        });
+//
+//
+//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+//            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+//            return insets;
+//        });
 
+//        BottomNavigationView navigationView = findViewById(R.id.bottom_nav);
+//        navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                if (item.getItemId() == R.id.action_home) {
+//                    Toast.makeText(MainActivity.this, "Home", Toast.LENGTH_SHORT).show();
+//                } else if (item.getItemId() == R.id.action_movie) {
+//                    Toast.makeText(MainActivity.this, "Movie", Toast.LENGTH_SHORT).show();
+//                } else if (item.getItemId() == R.id.action_user) {
+//                    Toast.makeText(MainActivity.this, "Account", Toast.LENGTH_SHORT).show();
+//                }
+//                return true;
+//            }
+//        });
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        player.release();
-    }
+//    @Override
+//    protected void onStop() {
+//        super.onStop();
+//        player.release();
+//    }
 
 
 
