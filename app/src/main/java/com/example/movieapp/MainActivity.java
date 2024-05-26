@@ -1,20 +1,44 @@
 package com.example.movieapp;
 
 import android.annotation.SuppressLint;
+import android.content.ClipData;
+import android.media.RouteListingPreference;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.movieapp.api.APIService;
+import com.example.movieapp.model.MovieItem;
+import com.google.android.exoplayer2.ExoPlayer;
+import com.google.android.exoplayer2.MediaItem;
+import com.google.android.exoplayer2.source.MediaSource;
+import com.google.android.exoplayer2.source.hls.HlsMediaSource;
+import com.google.android.exoplayer2.ui.PlayerView;
+import com.google.android.exoplayer2.upstream.DefaultHttpDataSource;
+import com.google.android.exoplayer2.util.Util;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class MainActivity extends AppCompatActivity {
     private Button btn;
-    private TextView tv1, tv2;
+    private TextView tv1;
+    private ExoPlayer player;
+    private PlayerView playerView;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -23,23 +47,50 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        btn = findViewById(R.id.btn);
-        tv1 = findViewById(R.id.tvItem);
-        tv2 = findViewById(R.id.tvPage);
+//        btn = findViewById(R.id.btn);
+//        tv1 = findViewById(R.id.tvItem);
 
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                clickCallAPI();
-            }
-        });
+//        playerView = findViewById(R.id.video);
+//        player = new ExoPlayer.Builder(this).build();
+//        playerView.setPlayer(player);
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+//        btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                clickCallAPI();
+//            }
+//        });
+//
+//
+//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+//            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+//            return insets;
+//        });
+
+//        BottomNavigationView navigationView = findViewById(R.id.bottom_nav);
+//        navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                if (item.getItemId() == R.id.action_home) {
+//                    Toast.makeText(MainActivity.this, "Home", Toast.LENGTH_SHORT).show();
+//                } else if (item.getItemId() == R.id.action_movie) {
+//                    Toast.makeText(MainActivity.this, "Movie", Toast.LENGTH_SHORT).show();
+//                } else if (item.getItemId() == R.id.action_user) {
+//                    Toast.makeText(MainActivity.this, "Account", Toast.LENGTH_SHORT).show();
+//                }
+//                return true;
+//            }
+//        });
+
     }
+
+//    @Override
+//    protected void onStop() {
+//        super.onStop();
+//        player.release();
+//    }
+
 
 
     private void clickCallAPI() {
@@ -61,23 +112,34 @@ public class MainActivity extends AppCompatActivity {
 //        });
 
 
-//    https://phimapi.com/phim/khi-anh-chay-ve-phia-em
-//        APIService.apiService.callMovieDetail("khi-anh-chay-ve-phia-em").enqueue(new Callback<MovieItem>() {
-//            @Override
-//            public void onResponse(Call<MovieItem> call, Response<MovieItem> response) {
-//                Toast.makeText(MainActivity.this, "OK", Toast.LENGTH_LONG).show();
-//                MovieItem movieItem = response.body();
-//                if (movieItem != null && movieItem.isStatus()){
-//                    tv1.setText(movieItem.getMovieDetail().toString());
-//                }
+    https://phimapi.com/phim/khi-anh-chay-ve-phia-em
+        APIService.apiService.callMovieDetail("khi-anh-chay-ve-phia-em").enqueue(new Callback<MovieItem>() {
+            @Override
+            public void onResponse(Call<MovieItem> call, Response<MovieItem> response) {
+                Toast.makeText(MainActivity.this, "OK", Toast.LENGTH_LONG).show();
+                MovieItem movieItem = response.body();
+                if (movieItem != null && movieItem.isStatus()){
+                    tv1.setText(movieItem.getMovieDetail().getName()+", Eposide: "+movieItem.getEpisodes().get(0).getEpisodeItem().get(0).getName());
 
-//            }
-//
-//            @Override
-//            public void onFailure(Call<MovieItem> call, Throwable throwable) {
-//                Toast.makeText(MainActivity.this, "NO OK", Toast.LENGTH_LONG).show();
-//            }
-//        });
+
+                    Uri videoUri = Uri.parse(movieItem.getEpisodes().get(0).getEpisodeItem().get(0).getLinkM3U8());
+
+                    DefaultHttpDataSource.Factory dataSourceFactory = new DefaultHttpDataSource.Factory().setUserAgent(Util.getUserAgent(MainActivity.this, "MovieApp"));
+                    MediaSource mediaSource = new HlsMediaSource.Factory(dataSourceFactory).createMediaSource(MediaItem.fromUri(videoUri));
+
+                    player.setMediaSource(mediaSource);
+
+                    player.prepare();
+                    player.play();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<MovieItem> call, Throwable throwable) {
+                Toast.makeText(MainActivity.this, "NO OK", Toast.LENGTH_LONG).show();
+            }
+        });
 
 
 //    https://phimapi.com/v1/api/danh-sach/phim-le?page=1
