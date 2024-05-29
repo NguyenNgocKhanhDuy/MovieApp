@@ -1,10 +1,12 @@
 package com.example.movieapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,17 +21,22 @@ public class Register extends AppCompatActivity {
     private EditText passwordEditText;
     private Button registerButton;
     private FirebaseAuth mAuth;
+    private TextView singIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        emailEditText = findViewById(R.id.emailEditText);
-        passwordEditText = findViewById(R.id.passwordEditText);
-        registerButton = findViewById(R.id.registerButton);
+        emailEditText = findViewById(R.id.inputEmail);
+        passwordEditText = findViewById(R.id.inputPassword);
+        registerButton = findViewById(R.id.btnRegister);
 
         mAuth = FirebaseAuth.getInstance();
+        singIn = findViewById(R.id.textViewSignIn);
+        singIn.setOnClickListener(view ->{
+        startActivity(new Intent(Register.this, Login.class));
+        });
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
