@@ -2,6 +2,7 @@ package com.example.movieapp;
 
 import android.annotation.SuppressLint;
 import android.content.ClipData;
+import android.content.Intent;
 import android.media.RouteListingPreference;
 import android.net.Uri;
 import android.os.Bundle;
@@ -47,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
+
+//    }
 //        btn = findViewById(R.id.btn);
 //        tv1 = findViewById(R.id.tvItem);
 
@@ -68,20 +71,38 @@ public class MainActivity extends AppCompatActivity {
 //            return insets;
 //        });
 
-//        BottomNavigationView navigationView = findViewById(R.id.bottom_nav);
+        BottomNavigationView navigationView = findViewById(R.id.bottom_nav);
 //        navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
 //            @Override
 //            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                if (item.getItemId() == R.id.action_home) {
-//                    Toast.makeText(MainActivity.this, "Home", Toast.LENGTH_SHORT).show();
-//                } else if (item.getItemId() == R.id.action_movie) {
-//                    Toast.makeText(MainActivity.this, "Movie", Toast.LENGTH_SHORT).show();
-//                } else if (item.getItemId() == R.id.action_user) {
-//                    Toast.makeText(MainActivity.this, "Account", Toast.LENGTH_SHORT).show();
+//                switch (item.getItemId()) {
+//                    case R.id.action_home:
+////                        startActivity(new Intent(MainActivity.this, HomeActivity.class));
+//                        return true;
+//                    case R.id.action_movie:
+//                        // Điều hướng sang MovieActivity nếu có
+//                        // startActivity(new Intent(MainActivity.this, MovieActivity.class));
+//                        return true;
+//                    case R.id.action_user:
+//                        startActivity(new Intent(MainActivity.this, Login.class));
+//                        return true;
 //                }
-//                return true;
+//                return false;
 //            }
 //        });
+        navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if (item.getItemId() == R.id.action_home) {
+                    Toast.makeText(MainActivity.this, "Home", Toast.LENGTH_SHORT).show();
+                } else if (item.getItemId() == R.id.action_movie) {
+                    Toast.makeText(MainActivity.this, "Movie", Toast.LENGTH_SHORT).show();
+                } else if (item.getItemId() == R.id.action_user) {
+                    startActivity(new Intent(MainActivity.this, Login.class));
+                }
+                return true;
+            }
+        });
 
     }
 
@@ -93,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    private void clickCallAPI() {
+//    private void clickCallAPI() {
 //    https://phimapi.com/danh-sach/phim-moi-cap-nhat?page=1
 //        APIService.apiService.callNewUpdateMovie(1).enqueue(new Callback<ListMovieStatusBoolean>() {
 //            @Override
@@ -112,34 +133,34 @@ public class MainActivity extends AppCompatActivity {
 //        });
 
 
-    https://phimapi.com/phim/khi-anh-chay-ve-phia-em
-        APIService.apiService.callMovieDetail("khi-anh-chay-ve-phia-em").enqueue(new Callback<MovieItem>() {
-            @Override
-            public void onResponse(Call<MovieItem> call, Response<MovieItem> response) {
-                Toast.makeText(MainActivity.this, "OK", Toast.LENGTH_LONG).show();
-                MovieItem movieItem = response.body();
-                if (movieItem != null && movieItem.isStatus()){
-                    tv1.setText(movieItem.getMovieDetail().getName()+", Eposide: "+movieItem.getEpisodes().get(0).getEpisodeItem().get(0).getName());
-
-
-                    Uri videoUri = Uri.parse(movieItem.getEpisodes().get(0).getEpisodeItem().get(0).getLinkM3U8());
-
-                    DefaultHttpDataSource.Factory dataSourceFactory = new DefaultHttpDataSource.Factory().setUserAgent(Util.getUserAgent(MainActivity.this, "MovieApp"));
-                    MediaSource mediaSource = new HlsMediaSource.Factory(dataSourceFactory).createMediaSource(MediaItem.fromUri(videoUri));
-
-                    player.setMediaSource(mediaSource);
-
-                    player.prepare();
-                    player.play();
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<MovieItem> call, Throwable throwable) {
-                Toast.makeText(MainActivity.this, "NO OK", Toast.LENGTH_LONG).show();
-            }
-        });
+//    https://phimapi.com/phim/khi-anh-chay-ve-phia-em
+//        APIService.apiService.callMovieDetail("khi-anh-chay-ve-phia-em").enqueue(new Callback<MovieItem>() {
+//            @Override
+//            public void onResponse(Call<MovieItem> call, Response<MovieItem> response) {
+//                Toast.makeText(MainActivity.this, "OK", Toast.LENGTH_LONG).show();
+//                MovieItem movieItem = response.body();
+//                if (movieItem != null && movieItem.isStatus()){
+//                    tv1.setText(movieItem.getMovieDetail().getName()+", Eposide: "+movieItem.getEpisodes().get(0).getEpisodeItem().get(0).getName());
+//
+//
+//                    Uri videoUri = Uri.parse(movieItem.getEpisodes().get(0).getEpisodeItem().get(0).getLinkM3U8());
+//
+//                    DefaultHttpDataSource.Factory dataSourceFactory = new DefaultHttpDataSource.Factory().setUserAgent(Util.getUserAgent(MainActivity.this, "MovieApp"));
+//                    MediaSource mediaSource = new HlsMediaSource.Factory(dataSourceFactory).createMediaSource(MediaItem.fromUri(videoUri));
+//
+//                    player.setMediaSource(mediaSource);
+//
+//                    player.prepare();
+//                    player.play();
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<MovieItem> call, Throwable throwable) {
+//                Toast.makeText(MainActivity.this, "NO OK", Toast.LENGTH_LONG).show();
+//            }
+//        });
 
 
 //    https://phimapi.com/v1/api/danh-sach/phim-le?page=1
@@ -183,4 +204,3 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
     }
-}
