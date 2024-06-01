@@ -18,6 +18,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.movieapp.api.APIService;
 import com.example.movieapp.model.MovieItem;
@@ -41,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
     private ExoPlayer player;
     private PlayerView playerView;
 
+    private BottomNavigationView mNavigationView;
+    private ViewPager mViewPager;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,39 +76,56 @@ public class MainActivity extends AppCompatActivity {
 //            return insets;
 //        });
 
-        BottomNavigationView navigationView = findViewById(R.id.bottom_nav);
-//        navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                switch (item.getItemId()) {
-//                    case R.id.action_home:
-////                        startActivity(new Intent(MainActivity.this, HomeActivity.class));
-//                        return true;
-//                    case R.id.action_movie:
-//                        // Điều hướng sang MovieActivity nếu có
-//                        // startActivity(new Intent(MainActivity.this, MovieActivity.class));
-//                        return true;
-//                    case R.id.action_user:
-//                        startActivity(new Intent(MainActivity.this, Login.class));
-//                        return true;
-//                }
-//                return false;
-//            }
-//        });
-        navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        mNavigationView = findViewById(R.id.bottom_nav);
+     mViewPager = findViewById(R.id.view_pager);
+     setUpViewPager();
+        mNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (item.getItemId() == R.id.action_home) {
-                    Toast.makeText(MainActivity.this, "Home", Toast.LENGTH_SHORT).show();
+                    mViewPager.setCurrentItem(0);
                 } else if (item.getItemId() == R.id.action_movie) {
-                    Toast.makeText(MainActivity.this, "Movie", Toast.LENGTH_SHORT).show();
+                    mViewPager.setCurrentItem(1);
                 } else if (item.getItemId() == R.id.action_user) {
-                    startActivity(new Intent(MainActivity.this, Login.class));
+                    mViewPager.setCurrentItem(2);
                 }
                 return true;
             }
         });
 
+    }
+    private void setUpViewPager() {
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        mViewPager.setAdapter(viewPagerAdapter);
+
+        mViewPager.setAdapter(viewPagerAdapter);
+
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                switch (position) {
+                    case 0:
+                        mNavigationView.getMenu().findItem(R.id.action_home).setChecked(true);
+                                break;
+                    case 1:
+                        mNavigationView.getMenu().findItem(R.id.action_movie).setChecked(true);
+                        break;
+                    case 2:
+                        mNavigationView.getMenu().findItem(R.id.action_user).setChecked(true);
+                        break;
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
 //    @Override
