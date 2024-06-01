@@ -32,10 +32,10 @@
             android:layout_marginLeft="10dp"/>
 
         <!-- PlayerView (nếu cần thiết) -->
-        <!--<com.google.android.exoplayer2.ui.PlayerView
+        <com.google.android.exoplayer2.ui.PlayerView
             android:id="@+id/video"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>-->
+            android:layout_height="match_parent"/>
 
         <!-- BottomNavigationView -->
         <com.google.android.material.bottomnavigation.BottomNavigationView
