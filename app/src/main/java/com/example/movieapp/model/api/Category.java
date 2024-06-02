@@ -1,14 +1,14 @@
-package com.example.movieapp.model;
+package com.example.movieapp.model.api;
 
-public class Country {
+public class Category {
     private String id;
     private String name;
     private String slug;
 
-    public Country() {
+    public Category() {
     }
 
-    public Country(String id, String name, String slug) {
+    public Category(String id, String name, String slug) {
         this.id = id;
         this.name = name;
         this.slug = slug;
@@ -40,7 +40,7 @@ public class Country {
 
     @Override
     public String toString() {
-        return "Country{" +
+        return "Category{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", slug='" + slug + '\'' +
