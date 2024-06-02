@@ -1,8 +1,8 @@
 package com.example.movieapp.api;
 
-import com.example.movieapp.model.ListMovieStatusString;
-import com.example.movieapp.model.ListMovieStatusBoolean;
-import com.example.movieapp.model.MovieItem;
+import com.example.movieapp.model.api.ListMovieStatusString;
+import com.example.movieapp.model.api.ListMovieStatusBoolean;
+import com.example.movieapp.model.api.MovieItem;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 

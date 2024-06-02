@@ -1,4 +1,4 @@
-package com.example.movieapp.model;
+package com.example.movieapp.model.api;
 
 public class ListMovieStatusString {
     private String status;
