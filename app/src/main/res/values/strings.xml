@@ -3,6 +3,10 @@
     <string name="action_home">HOME</string>
     <string name="action_movie">MOVIE</string>
     <string name="action_user">ACCOUNT</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="client_id">1050439031038-juq05gf4hpl83mkoi37tus0qjficncck.apps.googleusercontent.com</string>
 
 
