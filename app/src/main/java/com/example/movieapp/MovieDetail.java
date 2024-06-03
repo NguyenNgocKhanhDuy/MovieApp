@@ -1,4 +1,4 @@
-package com.example.yourapp;
+package com.example.movieapp;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -66,6 +67,8 @@ public class MovieDetail extends Fragment {
         movieGenre.setText("Action, Sci-Fi");
         movieSynopsis.setText("Rey (Daisy Ridley) finally manages to find the legendary Jedi knight, Luke Skywalker (Mark Hamill) on an island with a magical aura. The heroes of The Force Awakens including Leia, Finn...");
         // Play button click listener
+        View playButton;
+        playButton = view.findViewById(R.id.play_button);
         playButton.setOnClickListener(v -> {
             // Code to start video playback or navigate to video player
             Toast.makeText(getContext(), "Play button clicked", Toast.LENGTH_SHORT).show();
