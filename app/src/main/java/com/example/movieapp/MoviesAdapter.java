@@ -1,4 +1,4 @@
 package com.example.movieapp;
 
-public class MoviesViewModel {
+public class MoviesAdapter {
 }

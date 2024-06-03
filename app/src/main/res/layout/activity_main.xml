@@ -6,37 +6,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-        <!-- Các phần tử bị comment đã bỏ comment lại nếu cần thiết -->
-        <Button
-            android:id="@+id/btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="CLick"
-            android:layout_gravity="center"
-            android:layout_marginTop="50dp"/>
+<!--         Các phần tử bị comment đã bỏ comment lại nếu cần thiết -->
+<!--        <Button-->
+<!--            android:id="@+id/btn"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="CLick"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_marginTop="50dp"/>-->
 
-        <TextView
-            android:id="@+id/tvItem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="..."
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"/>
+<!--        <TextView-->
+<!--            android:id="@+id/tvItem"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="..."-->
+<!--            android:layout_marginRight="10dp"-->
+<!--            android:layout_marginLeft="10dp"/>-->
 
-        <TextView
-            android:id="@+id/tvPage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/app_name"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"/>
+<!--        <TextView-->
+<!--            android:id="@+id/tvPage"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="@string/app_name"-->
+<!--            android:layout_marginRight="10dp"-->
+<!--            android:layout_marginLeft="10dp"/>-->
 
-        <!-- PlayerView (nếu cần thiết) -->
-        <com.google.android.exoplayer2.ui.PlayerView
-            android:id="@+id/video"
+<!--        &lt;!&ndash; PlayerView (nếu cần thiết) &ndash;&gt;-->
+<!--        <com.google.android.exoplayer2.ui.PlayerView-->
+<!--            android:id="@+id/video"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"/>-->
+        
+        <androidx.viewpager.widget.ViewPager
+                android:id="@+id/view_pager"
             android:layout_width="match_parent"
+            android:layout_above="@+id/bottom_nav"
             android:layout_height="match_parent"/>
-
         <!-- BottomNavigationView -->
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_nav"

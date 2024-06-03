@@ -10,6 +10,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.movieapp.dao.UserDao;
+import com.example.movieapp.model.db.User;
+import com.example.movieapp.services.UserService;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
@@ -19,6 +23,7 @@ public class Register extends AppCompatActivity {
 
     private EditText emailEditText;
     private EditText passwordEditText;
+    private EditText userNameEditText;
     private Button registerButton;
     private FirebaseAuth mAuth;
     private TextView singIn;
@@ -30,6 +35,7 @@ public class Register extends AppCompatActivity {
 
         emailEditText = findViewById(R.id.inputEmail);
         passwordEditText = findViewById(R.id.inputPassword);
+        userNameEditText = findViewById(R.id.inputUsername);
         registerButton = findViewById(R.id.btnRegister);
 
         mAuth = FirebaseAuth.getInstance();
@@ -49,6 +55,7 @@ public class Register extends AppCompatActivity {
     private void registerUser() {
         String email = emailEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
+        String userName = userNameEditText.getText().toString().trim();
 
         if (TextUtils.isEmpty(email)) {
             emailEditText.setError("Email is required.");
@@ -65,12 +72,17 @@ public class Register extends AppCompatActivity {
             return;
         }
 
-        mAuth.createUserWithEmailAndPassword(email, password)
+        String hashPassword = UserService.getInstance().hashPassword(password);
+
+        mAuth.createUserWithEmailAndPassword(email, hashPassword)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         FirebaseUser user = mAuth.getCurrentUser();
+                        User user2 = new User(userName, email, hashPassword, "");
+                        UserDao.getInstance().insertUser(user2);
                         Toast.makeText(Register.this, "Registration successful", Toast.LENGTH_SHORT).show();
-                        // Navigate to another activity or perform other actions
+                        Intent intent = new Intent(Register.this, Login.class);
+                        startActivity(intent);
                     } else {
                         if (task.getException() instanceof FirebaseAuthUserCollisionException) {
                             Toast.makeText(Register.this, "User with this email already exists.", Toast.LENGTH_SHORT).show();
