@@ -1,6 +1,7 @@
 package com.example.movieapp;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Button;
@@ -95,6 +96,8 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 2:
                         mNavigationView.getMenu().findItem(R.id.action_user).setChecked(true);
+                        Intent intent = new Intent(MainActivity.this,Setting.class);
+                        startActivity(intent);
                         break;
                 }
             }

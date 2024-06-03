@@ -45,15 +45,15 @@ public class MovieDetail extends Fragment {
         movieReleaseDate = view.findViewById(R.id.movie_release_date);
         movieGenre = view.findViewById(R.id.movie_genre);
         movieSynopsis = view.findViewById(R.id.movie_synopsis);
-        recyclerRelatedMovies = view.findViewById(R.id.recycler_related_movies);
+//        recyclerRelatedMovies = view.findViewById(R.id.recycler_related_movies);
 
         recyclerRelatedMovies.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
         // Sample data for related movies
         relatedMovieList = new ArrayList<>();
-        relatedMovieList.add(new Movie("Star Wars: The Rise of Skywalker", "2019", R.drawable.star_wars_rise_of_skywalker));
-        relatedMovieList.add(new Movie("Star Wars: The Force Awakens", "2015", R.drawable.star_wars_force_awakens));
-        relatedMovieList.add(new Movie("Rogue One: A Star Wars Story", "2016", R.drawable.rogue_one));
+//        relatedMovieList.add(new Movie("Star Wars: The Rise of Skywalker", "2019", R.drawable.star_wars_rise_of_skywalker));
+//        relatedMovieList.add(new Movie("Star Wars: The Force Awakens", "2015", R.drawable.star_wars_force_awakens));
+//        relatedMovieList.add(new Movie("Rogue One: A Star Wars Story", "2016", R.drawable.rogue_one));
 
         relatedMoviesAdapter = new MoviesAdapter(relatedMovieList);
         recyclerRelatedMovies.setAdapter(relatedMoviesAdapter);
