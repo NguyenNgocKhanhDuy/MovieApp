@@ -1,4 +1,4 @@
-package com.example.movieapp;
+package com.example.movieapp.dao;
 
 import com.example.movieapp.model.db.User;
 

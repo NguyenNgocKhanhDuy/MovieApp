@@ -3,14 +3,8 @@ package com.example.movieapp.dao;
 import static android.content.ContentValues.TAG;
 
 import android.util.Log;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-
-import com.example.movieapp.FirebaseCallback;
 import com.example.movieapp.model.db.User;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,7 +28,7 @@ public class UserDao {
     }
 
     public void insertUser(User user) {
-        userRef.child("21130035").setValue(user);
+        userRef.push().setValue(user);
     }
 
     public List<User> selectAllUser(FirebaseCallback callback) {
