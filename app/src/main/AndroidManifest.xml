@@ -26,12 +26,6 @@
             android:name=".EditProfile"
             android:exported="false" />
         <activity
-            android:name=".Setting"
-            android:exported="false" />
-        <activity
-            android:name=".Profile"
-            android:exported="false" />
-        <activity
             android:name=".Register"
             android:exported="false" />
         <activity
@@ -44,7 +38,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MovieDetail"
+            android:name=".MovieDetailFragment"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

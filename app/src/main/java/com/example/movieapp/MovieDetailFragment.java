@@ -14,13 +14,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.movieapp.MoviesAdapter;
 import com.example.movieapp.model.api.Movie;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MovieDetail extends Fragment {
+public class MovieDetailFragment extends Fragment {
 
     private ImageView moviePoster;
     private TextView movieTitle;
