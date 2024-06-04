@@ -6,5 +6,7 @@
     <color name="item">#3c3c44</color>
     <color name="red">#F44336</color>
     <color name="blue">#F44336</color>
+    <color name="background">#15141f</color>
+    <color name="orText">#fb765a</color>
 
 </resources>

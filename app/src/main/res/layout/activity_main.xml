@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background">
 
 <!--         Các phần tử bị comment đã bỏ comment lại nếu cần thiết -->
 <!--        <Button-->
@@ -37,11 +38,12 @@
 <!--            android:layout_width="match_parent"-->
 <!--            android:layout_height="match_parent"/>-->
         
-        <androidx.viewpager.widget.ViewPager
+        <com.example.movieapp.services.CustomViewPager
                 android:id="@+id/view_pager"
             android:layout_width="match_parent"
             android:layout_above="@+id/bottom_nav"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:paddingBottom="10dp"/>
         <!-- BottomNavigationView -->
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_nav"
@@ -49,8 +51,8 @@
             android:layout_height="100dp"
             app:itemIconTint="@color/custom_color_bottom_nav"
             app:menu="@menu/menu_bottom_nav"
-            app:itemBackground="@color/black"
-            android:background="@color/black"
+            app:itemBackground="@color/background"
+            android:background="@color/background"
             android:layout_alignParentBottom="true"
             app:itemTextColor="@color/custom_color_bottom_nav"
             app:itemActiveIndicatorStyle="@style/Widget.Design.BottomNavigationView"

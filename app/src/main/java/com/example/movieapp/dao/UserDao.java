@@ -34,7 +34,7 @@ public class UserDao {
     }
 
     public void insertUser(User user) {
-        userRef.child("21130035").setValue(user);
+        userRef.child(user.getEmail()).setValue(user);
     }
 
     public List<User> selectAllUser(FirebaseCallback callback) {
