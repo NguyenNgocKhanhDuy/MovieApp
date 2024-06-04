@@ -96,8 +96,8 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 2:
                         mNavigationView.getMenu().findItem(R.id.action_user).setChecked(true);
-                        Intent intent = new Intent(MainActivity.this,Setting.class);
-                        startActivity(intent);
+//                        Intent intent = new Intent(MainActivity.this,Setting.class);
+//                        startActivity(intent);
                         break;
                 }
             }
