@@ -4,6 +4,6 @@
     <string name="action_movie">MOVIE</string>
     <string name="action_user">ACCOUNT</string>
     <string name="client_id">1050439031038-juq05gf4hpl83mkoi37tus0qjficncck.apps.googleusercontent.com</string>
-
+    <string name="action_search">Search</string>
 
 </resources>
