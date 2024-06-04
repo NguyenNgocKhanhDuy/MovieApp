@@ -40,6 +40,9 @@ android {
 
 dependencies {
 
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
+    implementation ("androidx.recyclerview:recyclerview:1.3.2")
+
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
@@ -91,6 +94,7 @@ dependencies {
 
     implementation("com.google.android.gms:play-services-auth:21.0.0")
     implementation("com.google.firebase:firebase-database")
+
     implementation("com.android.support:multidex:1.0.3")
     implementation("androidx.viewpager2:viewpager2:1.0.0")
     implementation("com.github.bumptech.glide:glide:4.12.0")
@@ -99,5 +103,4 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview")
     implementation ("com.github.bumptech.glide:glide:4.16.0")
     implementation ("de.hdodenhof:circleimageview:3.1.0")
-
 }
