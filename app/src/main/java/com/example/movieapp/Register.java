@@ -3,6 +3,7 @@ package com.example.movieapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 import com.example.movieapp.R;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class Register extends AppCompatActivity {
 
@@ -80,6 +82,22 @@ public class Register extends AppCompatActivity {
                         FirebaseUser user = mAuth.getCurrentUser();
                         User user2 = new User(userName, email, hashPassword, "");
                         UserDao.getInstance().insertUser(user2);
+                        FirebaseUser userAfterInsert = FirebaseAuth.getInstance().getCurrentUser();
+                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                .setDisplayName(user2.getUsername())
+                                .build();
+
+                        userAfterInsert.updateProfile(profileUpdates)
+                                .addOnCompleteListener(task2 -> {
+                                    if (task2.isSuccessful()) {
+                                        // Update succeeded
+                                        Log.d("TAG", "Display name updated.");
+                                    } else {
+                                        // Update failed
+                                        Log.w("TAG", "Failed to update display name.", task2.getException());
+                                    }
+                                });
+
                         Toast.makeText(Register.this, "Registration successful", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(Register.this, Login.class);
                         startActivity(intent);
