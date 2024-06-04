@@ -19,7 +19,7 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-
+        multiDexEnabled = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -46,10 +46,14 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.media3.datasource)
     implementation(libs.firebase.auth)
+
+    implementation(libs.firebase.database)
+
     implementation(libs.navigation.fragment)
 //    implementation(libs.recyclerview)
     implementation(libs.navigation.ui)
     implementation(libs.firebase.inappmessaging)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -67,6 +71,8 @@ dependencies {
 
     implementation(platform("com.google.firebase:firebase-bom:32.8.0"))
 
+
+    dependencies {
     implementation("androidx.appcompat:appcompat:1.4.0")
     implementation("androidx.activity:activity:1.2.3")
     implementation("androidx.constraintlayout:constraintlayout:2.1.0")
@@ -85,8 +91,12 @@ dependencies {
 
     implementation("com.google.android.gms:play-services-auth:21.0.0")
     implementation("com.google.firebase:firebase-database")
+    implementation("com.android.support:multidex:1.0.3")
+    implementation("androidx.viewpager2:viewpager2:1.0.0")
+    implementation("com.github.bumptech.glide:glide:4.12.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
+    }
     implementation("androidx.recyclerview:recyclerview")
-
     implementation ("com.github.bumptech.glide:glide:4.16.0")
     implementation ("de.hdodenhof:circleimageview:3.1.0")
 
