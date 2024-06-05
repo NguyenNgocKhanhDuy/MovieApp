@@ -15,7 +15,6 @@
         android:theme="@style/Theme.MovieApp"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-
         <activity
             android:name=".ChangeLanguage"
             android:exported="false"
@@ -30,15 +29,8 @@
             android:name=".Register"
             android:exported="false" />
         <activity
-            android:name=".SearchFilm"
-            android:exported="true">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-        </activity>
-
+            android:name=".MovieDetailActivity"
+            android:exported="false" />
 
         <activity
             android:name=".Login"

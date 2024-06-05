@@ -17,15 +17,15 @@ import androidx.navigation.ui.NavigationUI;
 import com.example.movieapp.databinding.ActivityChangeLanguageBinding;
 
 public class ChangeLanguage extends AppCompatActivity {
-    private ImageView imageView;
+    private ImageView back;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_language);
-        imageView = findViewById(R.id.back);
-        imageView.setOnClickListener(new View.OnClickListener() {
+        back = findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();

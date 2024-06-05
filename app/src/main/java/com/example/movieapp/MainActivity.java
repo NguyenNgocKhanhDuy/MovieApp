@@ -149,21 +149,21 @@ public class MainActivity extends AppCompatActivity {
 //            @Override
 //            public void onResponse(Call<MovieItem> call, Response<MovieItem> response) {
 //                Toast.makeText(MainActivity.this, "OK", Toast.LENGTH_LONG).show();
-//                MovieItem movieItem = response.body();
-//                if (movieItem != null && movieItem.isStatus()){
-//                    tv1.setText(movieItem.getMovieDetail().getName()+", Eposide: "+movieItem.getEpisodes().get(0).getEpisodeItem().get(0).getName());
-//
-//
-//                    Uri videoUri = Uri.parse(movieItem.getEpisodes().get(0).getEpisodeItem().get(0).getLinkM3U8());
-//
-//                    DefaultHttpDataSource.Factory dataSourceFactory = new DefaultHttpDataSource.Factory().setUserAgent(Util.getUserAgent(MainActivity.this, "MovieApp"));
-//                    MediaSource mediaSource = new HlsMediaSource.Factory(dataSourceFactory).createMediaSource(MediaItem.fromUri(videoUri));
-//
-//                    player.setMediaSource(mediaSource);
-//
-//                    player.prepare();
-//                    player.play();
-//                }
+    //                MovieItem movieItem = response.body();
+    //                if (movieItem != null && movieItem.isStatus()){
+    //                    tv1.setText(movieItem.getMovieDetail().getName()+", Eposide: "+movieItem.getEpisodes().get(0).getEpisodeItem().get(0).getName());
+    //
+    //
+    //                    Uri videoUri = Uri.parse(movieItem.getEpisodes().get(0).getEpisodeItem().get(0).getLinkM3U8());
+    //
+    //                    DefaultHttpDataSource.Factory dataSourceFactory = new DefaultHttpDataSource.Factory().setUserAgent(Util.getUserAgent(MainActivity.this, "MovieApp"));
+    //                    MediaSource mediaSource = new HlsMediaSource.Factory(dataSourceFactory).createMediaSource(MediaItem.fromUri(videoUri));
+    //
+    //                    player.setMediaSource(mediaSource);
+    //
+    //                    player.prepare();
+    //                    player.play();
+    //                }
 //
 //            }
 //
