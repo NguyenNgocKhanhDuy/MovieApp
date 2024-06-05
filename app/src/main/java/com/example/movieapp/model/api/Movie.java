@@ -1,8 +1,15 @@
 package com.example.movieapp.model.api;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
-public class Movie {
+import java.io.Serializable;
+
+public class Movie implements Serializable{
     @SerializedName("modified")
     private Time time;
     @SerializedName("_id")
@@ -30,6 +37,17 @@ public class Movie {
         this.thumbURL = thumbURL;
         this.year = year;
     }
+
+    protected Movie(Parcel in) {
+        id = in.readString();
+        name = in.readString();
+        slug = in.readString();
+        originName = in.readString();
+        posterURL = in.readString();
+        thumbURL = in.readString();
+        year = in.readInt();
+    }
+
 
     public Time getTime() {
         return time;
@@ -108,4 +126,5 @@ public class Movie {
                 ", year=" + year +
                 '}';
     }
+
 }

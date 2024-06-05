@@ -22,7 +22,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class ChangePassword extends AppCompatActivity {
-    private ImageView imageView;
+    private ImageView back;
     private EditText currentPass, newPass, confirmPass;
     private Button changeBtn;
 
@@ -33,13 +33,13 @@ public class ChangePassword extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_change_password);
 
-        imageView = findViewById(R.id.back);
+        back = findViewById(R.id.back);
         currentPass = findViewById(R.id.currentPass);
         newPass = findViewById(R.id.newPass);
         confirmPass = findViewById(R.id.confirmPass);
         changeBtn = findViewById(R.id.change);
 
-        imageView.setOnClickListener(new View.OnClickListener() {
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();

@@ -1,14 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="#1e1c31">
+    tools:context=".MovieDetailActivity"
+    android:background="@color/background">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginRight="40px"
+        android:layout_marginLeft="40px"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/back"
+            android:layout_marginBottom="40px"/>
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -18,8 +31,8 @@
                 android:id="@+id/movie_poster"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/star_wars_last_jedi" />
+                android:scaleType="centerInside"
+                android:src="@drawable/black" />
 
             <ImageView
                 android:id="@+id/play_button"
@@ -37,7 +50,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Star Wars: The Last Jedi"
             android:textColor="#ffffff"
             android:textSize="24sp"
             android:textStyle="bold" />
@@ -60,7 +72,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="152 minutes"
                 android:textColor="#9494a1" />
 
             <ImageView
@@ -75,7 +86,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="7.0 (IMDb)"
                 android:textColor="#9494a1" />
         </LinearLayout>
 
@@ -97,7 +107,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="December 9, 2017"
                 android:textColor="#ffffff" />
         </LinearLayout>
 
@@ -119,7 +128,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="Action, Sci-Fi"
                 android:textColor="#ffffff" />
         </LinearLayout>
 
@@ -137,7 +145,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Rey (Daisy Ridley) finally manages to find the legendary Jedi knight, Luke Skywalker (Mark Hamill) on an island with a magical aura. The heroes of The Force Awakens including Leia, Finn..."
             android:textColor="#9494a1" />
 
         <TextView
@@ -149,11 +156,12 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-<!--        <RecyclerView-->
-<!--            android:id="@+id/recycler_related_movies"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="8dp"-->
-<!--            android:orientation="horizontal" />-->
+        <!--        <RecyclerView-->
+        <!--            android:id="@+id/recycler_related_movies"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginTop="8dp"-->
+        <!--            android:orientation="horizontal" />-->
     </LinearLayout>
+
 </ScrollView>

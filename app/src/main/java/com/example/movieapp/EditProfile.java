@@ -25,7 +25,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class EditProfile extends AppCompatActivity {
-    private ImageView imageView, avatar;
+    private ImageView back, avatar;
     private FirebaseAuth auth;
     private EditText username;
     private TextView email;
@@ -39,14 +39,14 @@ public class EditProfile extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_edit_profile);
 
-        imageView = findViewById(R.id.back);
+        back = findViewById(R.id.back);
 
         username = findViewById(R.id.username);
         email = findViewById(R.id.email);
         avatar = findViewById(R.id.avatar);
         saveBtn = findViewById(R.id.save);
 
-        imageView.setOnClickListener(new View.OnClickListener() {
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
