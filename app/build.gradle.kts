@@ -56,6 +56,7 @@ dependencies {
 //    implementation(libs.recyclerview)
     implementation(libs.navigation.ui)
     implementation(libs.firebase.inappmessaging)
+    implementation(libs.media3.exoplayer)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
