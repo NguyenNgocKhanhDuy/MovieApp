@@ -156,6 +156,27 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
+
+
+        <FrameLayout
+            android:id="@+id/main_media_frame"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:background="#000000">
+
+            <com.google.android.exoplayer2.ui.PlayerView
+                android:id="@+id/exoplayer"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:gravity="center"
+                app:controller_layout_id="@layout/exo_playback_control_view"/>
+
+        </FrameLayout>
+
+
+
+
         <!--        <RecyclerView-->
         <!--            android:id="@+id/recycler_related_movies"-->
         <!--            android:layout_width="match_parent"-->
