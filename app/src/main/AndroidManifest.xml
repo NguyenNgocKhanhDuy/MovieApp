@@ -16,22 +16,14 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-<<<<<<< HEAD
             android:name=".Activity_watching_movie"
-            android:exported="true"
-            >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:exported="true">
         </activity>
-=======
+        <activity
             android:name=".DiscoverActivity"
             android:exported="false"
             android:label="@string/title_activity_discover"
             android:theme="@style/Theme.MovieApp" />
->>>>>>> bfb85114ace6e2104cd850abbc81f15f0e19d962
         <activity
             android:name=".ChangeLanguage"
             android:exported="false"
@@ -51,19 +43,20 @@
         <activity
             android:name=".Login"
             android:exported="true">
-<<<<<<< HEAD
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             </intent-filter>
-=======
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MAIN" />-->
 <!--                <category android:name="android.intent.category.LAUNCHER" />-->
 <!--            </intent-filter>-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
->>>>>>> bfb85114ace6e2104cd850abbc81f15f0e19d962
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".MovieDetailActivity"
@@ -71,7 +64,6 @@
             tools:ignore="DuplicateActivity" />
         <activity
             android:name=".MainActivity"
-<<<<<<< HEAD
             android:exported="false">
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MAIN" />-->
@@ -82,10 +74,8 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
-                 <category android:name="android.intent.category.LAUNCHER" />
+<!--                 <category android:name="android.intent.category.LAUNCHER" />-->
             </intent-filter>
->>>>>>> bfb85114ace6e2104cd850abbc81f15f0e19d962
         </activity>
     </application>
 
