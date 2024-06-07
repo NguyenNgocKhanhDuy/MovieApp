@@ -99,7 +99,7 @@ public class Activity_watching_movie extends AppCompatActivity {
                 Log.d(TAG, "Movie: "+movieItem.getMovieDetail());
                 if (movieItem != null && movieItem.isStatus()){
                     tvName.setText(movieItem.getMovieDetail().getName());
-                    numberOfButtons = movieItem.getEpisodes().get(0).getEpisodeItem().size();
+                    numberOfButtons = movieItem.getEpisodes().get(0).getEpisodeItem().size() - 1;
                     createButtons(numberOfButtons);
                 }
             }
