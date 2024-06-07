@@ -4,6 +4,7 @@ import static android.content.ContentValues.TAG;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ import com.bumptech.glide.Glide;
 import com.example.movieapp.api.APIService;
 import com.example.movieapp.model.api.Category;
 import com.example.movieapp.model.api.Movie;
+import com.example.movieapp.model.api.MovieDetail;
 import com.example.movieapp.model.api.MovieItem;
 import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.DefaultLoadControl;
@@ -60,32 +62,32 @@ public class MovieDetailActivity extends AppCompatActivity {
     private TextView movieRating;
     private TextView movieReleaseDate;
     private TextView movieGenre;
-    private TextView movieSynopsis;
+    private TextView movieSynopsis, movieActor;
 //    private ExoPlayer player;
-    private final String STATE_RESUME_WINDOW = "resumeWindow";
-    private final String STATE_RESUME_POSITION = "resumePosition";
-    private final String STATE_PLAYER_FULLSCREEN = "playerFullscreen";
-
-    private PlayerView mExoPlayerView;
-    private SimpleExoPlayer mExoPlayer;
-    private MediaItem mVideoSource;
-    private boolean mExoPlayerFullscreen = false;
-    private FrameLayout mFullScreenButton;
-    private ImageView mFullScreenIcon;
-    private Dialog mFullScreenDialog;
-
-    private int mResumeWindow;
-    private long mResumePosition;
-    private String movieURL;
+//    private final String STATE_RESUME_WINDOW = "resumeWindow";
+//    private final String STATE_RESUME_POSITION = "resumePosition";
+//    private final String STATE_PLAYER_FULLSCREEN = "playerFullscreen";
+//
 //    private PlayerView mExoPlayerView;
-
-    private ImageButton btnFullscreen;
-    private boolean isFullscreen = false;
-
-
-//    private RecyclerView recyclerRelatedMovies;
-    private MoviesDetailAdapter relatedMoviesAdapter;
-    private List<Movie> relatedMovieList;
+//    private SimpleExoPlayer mExoPlayer;
+//    private MediaItem mVideoSource;
+//    private boolean mExoPlayerFullscreen = false;
+//    private FrameLayout mFullScreenButton;
+//    private ImageView mFullScreenIcon;
+//    private Dialog mFullScreenDialog;
+//
+//    private int mResumeWindow;
+//    private long mResumePosition;
+//    private String movieURL;
+////    private PlayerView mExoPlayerView;
+//
+//    private ImageButton btnFullscreen;
+//    private boolean isFullscreen = false;
+//
+//
+////    private RecyclerView recyclerRelatedMovies;
+//    private MoviesDetailAdapter relatedMoviesAdapter;
+//    private List<Movie> relatedMovieList;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -94,11 +96,11 @@ public class MovieDetailActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_movie_detail);
 
-        if (savedInstanceState != null) {
-            mResumeWindow = savedInstanceState.getInt(STATE_RESUME_WINDOW);
-            mResumePosition = savedInstanceState.getLong(STATE_RESUME_POSITION);
-            mExoPlayerFullscreen = savedInstanceState.getBoolean(STATE_PLAYER_FULLSCREEN);
-        }
+//        if (savedInstanceState != null) {
+//            mResumeWindow = savedInstanceState.getInt(STATE_RESUME_WINDOW);
+//            mResumePosition = savedInstanceState.getLong(STATE_RESUME_POSITION);
+//            mExoPlayerFullscreen = savedInstanceState.getBoolean(STATE_PLAYER_FULLSCREEN);
+//        }
 
 
         back = findViewById(R.id.back);
@@ -109,6 +111,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         movieReleaseDate = findViewById(R.id.movie_release_date);
         movieGenre = findViewById(R.id.movie_genre);
         movieSynopsis = findViewById(R.id.movie_synopsis);
+        movieActor = findViewById(R.id.actor);
 
 
         back.setOnClickListener(new View.OnClickListener() {
@@ -167,8 +170,21 @@ public class MovieDetailActivity extends AppCompatActivity {
 
                     movieGenre.setText(s);
                     movieSynopsis.setText(movieItem.getMovieDetail().getContent());
-                    movieURL = movieItem.getEpisodes().get(0).getEpisodeItem().get(0).getLinkM3U8();
-                    Log.d(TAG, "Test 1: "+movieURL);
+
+                    String actor = "";
+                    List<String> actors = movieItem.getMovieDetail().getActor();
+                    for (int i = 0; i < actors.size(); i++) {
+                        if (i != actors.size()-1){
+                            actor += actors.get(i) +", ";
+                        }else {
+                            actor += actors.get(i);
+                        }
+                    }
+                    movieActor.setText(actor);
+
+
+//                    movieURL = movieItem.getEpisodes().get(0).getEpisodeItem().get(0).getLinkM3U8();
+//                    Log.d(TAG, "Test 1: "+movieURL);
 
 
 //                    player = new ExoPlayer.Builder(MovieDetailActivity.this).build();
@@ -182,31 +198,31 @@ public class MovieDetailActivity extends AppCompatActivity {
 //                    player.prepare();
 //                    player.play();
 
-                    if (mExoPlayerView == null) {
-                        mExoPlayerView = findViewById(R.id.exoplayer);
-                        initFullscreenDialog();
-                        initFullscreenButton();
-
-                        Log.d(TAG, "Test 2: "+movieURL);
-                        String streamUrl = movieURL;
-                        Log.d(TAG, "Test 3: "+streamUrl);
-                        String userAgent = Util.getUserAgent(MovieDetailActivity.this, getApplicationInfo().packageName);
-
-                        DefaultHttpDataSource.Factory httpDataSourceFactory = new DefaultHttpDataSource.Factory().setUserAgent(userAgent);
-                        DefaultDataSourceFactory dataSourceFactory = new DefaultDataSourceFactory(MovieDetailActivity.this, httpDataSourceFactory);
-                        Uri daUri = Uri.parse(streamUrl);
-
-                        mVideoSource = new MediaItem.Builder().setUri(daUri).setMimeType(MimeTypes.APPLICATION_M3U8).build();
-                    }
-
-                    initExoPlayer();
-
-                    if (mExoPlayerFullscreen) {
-                        ((ViewGroup) mExoPlayerView.getParent()).removeView(mExoPlayerView);
-                        mFullScreenDialog.addContentView(mExoPlayerView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-                        mFullScreenIcon.setImageDrawable(ContextCompat.getDrawable(MovieDetailActivity.this, R.drawable.ic_fullscreen_shrink));
-                        mFullScreenDialog.show();
-                    }
+//                    if (mExoPlayerView == null) {
+//                        mExoPlayerView = findViewById(R.id.exoplayer);
+//                        initFullscreenDialog();
+//                        initFullscreenButton();
+//
+//                        Log.d(TAG, "Test 2: "+movieURL);
+//                        String streamUrl = movieURL;
+//                        Log.d(TAG, "Test 3: "+streamUrl);
+//                        String userAgent = Util.getUserAgent(MovieDetailActivity.this, getApplicationInfo().packageName);
+//
+//                        DefaultHttpDataSource.Factory httpDataSourceFactory = new DefaultHttpDataSource.Factory().setUserAgent(userAgent);
+//                        DefaultDataSourceFactory dataSourceFactory = new DefaultDataSourceFactory(MovieDetailActivity.this, httpDataSourceFactory);
+//                        Uri daUri = Uri.parse(streamUrl);
+//
+//                        mVideoSource = new MediaItem.Builder().setUri(daUri).setMimeType(MimeTypes.APPLICATION_M3U8).build();
+//                    }
+//
+//                    initExoPlayer();
+//
+//                    if (mExoPlayerFullscreen) {
+//                        ((ViewGroup) mExoPlayerView.getParent()).removeView(mExoPlayerView);
+//                        mFullScreenDialog.addContentView(mExoPlayerView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+//                        mFullScreenIcon.setImageDrawable(ContextCompat.getDrawable(MovieDetailActivity.this, R.drawable.ic_fullscreen_shrink));
+//                        mFullScreenDialog.show();
+//                    }
 
 
                 }
@@ -231,6 +247,10 @@ public class MovieDetailActivity extends AppCompatActivity {
         playButton.setOnClickListener(v -> {
             // Code to start video playback or navigate to video player
             Toast.makeText(MovieDetailActivity.this, "Play button clicked", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MovieDetailActivity.this, Activity_watching_movie.class);
+            bundle.putString("slug", slug);
+            intent.putExtra("bundle", bundle);
+            startActivity(intent);
         });
 
 
@@ -243,81 +263,81 @@ public class MovieDetailActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
+//    @Override
+//    public void onSaveInstanceState(Bundle outState) {
+//
+//        outState.putInt(STATE_RESUME_WINDOW, mResumeWindow);
+//        outState.putLong(STATE_RESUME_POSITION, mResumePosition);
+//        outState.putBoolean(STATE_PLAYER_FULLSCREEN, mExoPlayerFullscreen);
+//
+//        super.onSaveInstanceState(outState);
+//    }
 
-        outState.putInt(STATE_RESUME_WINDOW, mResumeWindow);
-        outState.putLong(STATE_RESUME_POSITION, mResumePosition);
-        outState.putBoolean(STATE_PLAYER_FULLSCREEN, mExoPlayerFullscreen);
-
-        super.onSaveInstanceState(outState);
-    }
-
-    private void initFullscreenDialog() {
-
-        mFullScreenDialog = new Dialog(this, android.R.style.Theme_Black_NoTitleBar_Fullscreen) {
-            public void onBackPressed() {
-                if (mExoPlayerFullscreen)
-                    closeFullscreenDialog();
-                super.onBackPressed();
-            }
-        };
-    }
-
-    private void openFullscreenDialog() {
-
-        ((ViewGroup) mExoPlayerView.getParent()).removeView(mExoPlayerView);
-        mFullScreenDialog.addContentView(mExoPlayerView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        mFullScreenIcon.setImageDrawable(ContextCompat.getDrawable(MovieDetailActivity.this, R.drawable.ic_fullscreen_shrink));
-        mExoPlayerFullscreen = true;
-        mFullScreenDialog.show();
-    }
-
-    private void closeFullscreenDialog() {
-
-        ((ViewGroup) mExoPlayerView.getParent()).removeView(mExoPlayerView);
-        ((FrameLayout) findViewById(R.id.main_media_frame)).addView(mExoPlayerView);
-        mExoPlayerFullscreen = false;
-        mFullScreenDialog.dismiss();
-        mFullScreenIcon.setImageDrawable(ContextCompat.getDrawable(MovieDetailActivity.this, R.drawable.ic_fullscreen_expand));
-    }
-
-    private void initFullscreenButton() {
-
-        PlayerControlView controlView = mExoPlayerView.findViewById(R.id.exo_controller);
-        mFullScreenIcon = controlView.findViewById(R.id.exo_fullscreen_icon);
-        mFullScreenButton = controlView.findViewById(R.id.exo_fullscreen_button);
-        mFullScreenButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!mExoPlayerFullscreen)
-                    openFullscreenDialog();
-                else
-                    closeFullscreenDialog();
-            }
-        });
-    }
-
-    private void initExoPlayer() {
-
-
-        TrackSelector trackSelector = new DefaultTrackSelector(MovieDetailActivity.this, new AdaptiveTrackSelection.Factory());
-
-        mExoPlayer = new SimpleExoPlayer.Builder(this).setTrackSelector(trackSelector).setLoadControl(new DefaultLoadControl()).build();
-
-        mExoPlayerView.setPlayer(mExoPlayer);
-
-
-        boolean haveResumePosition = mResumeWindow != C.INDEX_UNSET;
-
-        if (haveResumePosition) {
-            mExoPlayer.seekTo(mResumeWindow, mResumePosition);
-        }
-
-        mExoPlayer.setMediaItem(mVideoSource);
-        mExoPlayer.prepare();
-        mExoPlayer.setPlayWhenReady(true);
-    }
+//    private void initFullscreenDialog() {
+//
+//        mFullScreenDialog = new Dialog(this, android.R.style.Theme_Black_NoTitleBar_Fullscreen) {
+//            public void onBackPressed() {
+//                if (mExoPlayerFullscreen)
+//                    closeFullscreenDialog();
+//                super.onBackPressed();
+//            }
+//        };
+//    }
+//
+//    private void openFullscreenDialog() {
+//
+//        ((ViewGroup) mExoPlayerView.getParent()).removeView(mExoPlayerView);
+//        mFullScreenDialog.addContentView(mExoPlayerView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+//        mFullScreenIcon.setImageDrawable(ContextCompat.getDrawable(MovieDetailActivity.this, R.drawable.ic_fullscreen_shrink));
+//        mExoPlayerFullscreen = true;
+//        mFullScreenDialog.show();
+//    }
+//
+//    private void closeFullscreenDialog() {
+//
+//        ((ViewGroup) mExoPlayerView.getParent()).removeView(mExoPlayerView);
+//        ((FrameLayout) findViewById(R.id.main_media_frame)).addView(mExoPlayerView);
+//        mExoPlayerFullscreen = false;
+//        mFullScreenDialog.dismiss();
+//        mFullScreenIcon.setImageDrawable(ContextCompat.getDrawable(MovieDetailActivity.this, R.drawable.ic_fullscreen_expand));
+//    }
+//
+//    private void initFullscreenButton() {
+//
+//        PlayerControlView controlView = mExoPlayerView.findViewById(R.id.exo_controller);
+//        mFullScreenIcon = controlView.findViewById(R.id.exo_fullscreen_icon);
+//        mFullScreenButton = controlView.findViewById(R.id.exo_fullscreen_button);
+//        mFullScreenButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (!mExoPlayerFullscreen)
+//                    openFullscreenDialog();
+//                else
+//                    closeFullscreenDialog();
+//            }
+//        });
+//    }
+//
+//    private void initExoPlayer() {
+//
+//
+//        TrackSelector trackSelector = new DefaultTrackSelector(MovieDetailActivity.this, new AdaptiveTrackSelection.Factory());
+//
+//        mExoPlayer = new SimpleExoPlayer.Builder(this).setTrackSelector(trackSelector).setLoadControl(new DefaultLoadControl()).build();
+//
+//        mExoPlayerView.setPlayer(mExoPlayer);
+//
+//
+//        boolean haveResumePosition = mResumeWindow != C.INDEX_UNSET;
+//
+//        if (haveResumePosition) {
+//            mExoPlayer.seekTo(mResumeWindow, mResumePosition);
+//        }
+//
+//        mExoPlayer.setMediaItem(mVideoSource);
+//        mExoPlayer.prepare();
+//        mExoPlayer.setPlayWhenReady(true);
+//    }
 
 
 //    @Override
@@ -351,20 +371,20 @@ public class MovieDetailActivity extends AppCompatActivity {
 //        }
 //    }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        if (mExoPlayerView != null && mExoPlayer != null) {
-            mResumeWindow = mExoPlayer.getCurrentWindowIndex();
-            mResumePosition = Math.max(0, mExoPlayer.getContentPosition());
-            mExoPlayer.release();
-            mExoPlayer = null;
-        }
-
-        if (mFullScreenDialog != null)
-            mFullScreenDialog.dismiss();
-    }
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//
+//        if (mExoPlayerView != null && mExoPlayer != null) {
+//            mResumeWindow = mExoPlayer.getCurrentWindowIndex();
+//            mResumePosition = Math.max(0, mExoPlayer.getContentPosition());
+//            mExoPlayer.release();
+//            mExoPlayer = null;
+//        }
+//
+//        if (mFullScreenDialog != null)
+//            mFullScreenDialog.dismiss();
+//    }
 
 
 }
