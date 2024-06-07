@@ -28,9 +28,7 @@
     public class ImageSliderAdapter extends RecyclerView.Adapter<ImageSliderAdapter.ViewHolder> {
         private List<MovieDetail> imageUrls;
         private Context context;
-    
-        private LinearLayout watch;
-    
+
     
         public ImageSliderAdapter(Context context, List<MovieDetail> imageUrls) {
             this.context = context;
@@ -42,26 +40,7 @@
         @Override
         public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(context).inflate(R.layout.item_image, parent, false);
-    
-            watch = view.findViewById(R.id.watch);
-    
-            watch.setOnClickListener(new View.OnClickListener() {
-                @SuppressLint("ResourceType")
-                @Override
-                public void onClick(View v) {
-                    int pos = (int) v.getTag();
-                    Intent intent = new Intent(context, MovieDetailActivity.class);
-                    MovieDetail movie = imageUrls.get(pos);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("slug", movie.getSlug());
-                    intent.putExtra("bundle", bundle);
-                    context.startActivity(intent);
-                }
-            });
-
-            watch.setTag(imageUrls.get(0));
-    
-            return new ViewHolder(view, watch);
+            return new ViewHolder(view);
         }
 
         @Override
@@ -71,8 +50,7 @@
                     .load(imageUrls.get(actualPosition).getThumbURL())
                     .into(holder.imageView);
 
-
-            holder.watch.setTag(actualPosition);
+            holder.setImgViewClickListener(imageUrls.get(actualPosition).getSlug(), context);
         }
     
         @Override
@@ -82,12 +60,24 @@
     
         public class ViewHolder extends RecyclerView.ViewHolder {
             ImageView imageView;
-            LinearLayout watch;
-    
-            public ViewHolder(@NonNull View itemView, LinearLayout watch) {
+
+            public ViewHolder(@NonNull View itemView) {
                 super(itemView);
                 imageView = itemView.findViewById(R.id.imageView);
-                this.watch = watch;
+            }
+
+            public void setImgViewClickListener(final String slug, Context context) {
+                imageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context, MovieDetailActivity.class);
+                        Bundle bundle = new Bundle();
+                        Log.d(TAG, "SLUG: " + slug);
+                        bundle.putString("slug", slug);
+                        intent.putExtra("bundle", bundle);
+                        context.startActivity(intent);
+                    }
+                });
             }
         }
     }

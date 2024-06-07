@@ -52,6 +52,7 @@ public class Activity_watching_movie extends AppCompatActivity {
     private FlexboxLayout flexboxLayout;
     private int numberOfButtons;
     private TextView tvEpisode, tvName;
+    private ImageView back;
     private final String STATE_RESUME_WINDOW = "resumeWindow";
     private final String STATE_RESUME_POSITION = "resumePosition";
     private final String STATE_PLAYER_FULLSCREEN = "playerFullscreen";
@@ -85,6 +86,13 @@ public class Activity_watching_movie extends AppCompatActivity {
          flexboxLayout = findViewById(R.id.flexbox_button_container);
         tvEpisode = findViewById(R.id.episodeCurrent);
         tvName = findViewById(R.id.name);
+        back = findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         Bundle bundle = getIntent().getBundleExtra("bundle");
         slug = bundle.getString("slug");
@@ -99,7 +107,7 @@ public class Activity_watching_movie extends AppCompatActivity {
                 Log.d(TAG, "Movie: "+movieItem.getMovieDetail());
                 if (movieItem != null && movieItem.isStatus()){
                     tvName.setText(movieItem.getMovieDetail().getName());
-                    numberOfButtons = movieItem.getEpisodes().get(0).getEpisodeItem().size() - 1;
+                    numberOfButtons = movieItem.getEpisodes().get(0).getEpisodeItem().size();
                     createButtons(numberOfButtons);
                 }
             }

@@ -11,6 +11,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -63,6 +67,9 @@ public class MovieDetailActivity extends AppCompatActivity {
     private TextView movieReleaseDate;
     private TextView movieGenre;
     private TextView movieSynopsis, movieActor;
+//    private WebView trailer;
+//    private FrameLayout videoContainer;
+
 //    private ExoPlayer player;
 //    private final String STATE_RESUME_WINDOW = "resumeWindow";
 //    private final String STATE_RESUME_POSITION = "resumePosition";
@@ -102,7 +109,8 @@ public class MovieDetailActivity extends AppCompatActivity {
 //            mExoPlayerFullscreen = savedInstanceState.getBoolean(STATE_PLAYER_FULLSCREEN);
 //        }
 
-
+//        videoContainer = findViewById(R.id.videoContainer);
+//        trailer = findViewById(R.id.trailer);
         back = findViewById(R.id.back);
         moviePoster = findViewById(R.id.movie_poster);
         movieTitle = findViewById(R.id.movie_title);
@@ -112,6 +120,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         movieGenre = findViewById(R.id.movie_genre);
         movieSynopsis = findViewById(R.id.movie_synopsis);
         movieActor = findViewById(R.id.actor);
+
 
 
         back.setOnClickListener(new View.OnClickListener() {
@@ -147,7 +156,19 @@ public class MovieDetailActivity extends AppCompatActivity {
                 MovieItem movieItem = response.body();
                 Log.d(TAG, "Movie: "+movieItem.getMovieDetail());
                 if (movieItem != null && movieItem.isStatus()){
-                    Glide.with(MovieDetailActivity.this).load(movieItem.getMovieDetail().getThumbURL()).into(moviePoster);
+//                    String trailerUrl = movieItem.getMovieDetail().getTrailerURL();
+//                    if (trailerUrl.equals("")) {
+                        Glide.with(MovieDetailActivity.this).load(movieItem.getMovieDetail().getThumbURL()).into(moviePoster);
+//                        trailer.setVisibility(View.GONE);
+//                    }else {
+//                        trailer.setVisibility(View.VISIBLE);
+//                        WebSettings webSettings = trailer.getSettings();
+//                        webSettings.setJavaScriptEnabled(true);
+//                        trailer.loadUrl(trailerUrl);
+//                        trailer.setWebViewClient(new WebViewClient());
+//                        moviePoster.setVisibility(View.GONE);
+//
+//                    }
                     movieTitle.setText(movieItem.getMovieDetail().getName());
                     movieDuration.setText(movieItem.getMovieDetail().getTime());
                     movieRating.setText("No Rating");
