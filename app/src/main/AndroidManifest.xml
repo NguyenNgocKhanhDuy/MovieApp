@@ -19,12 +19,6 @@
             android:name=".Activity_watching_movie"
             android:exported="false">
         </activity>
-<!--        <activity-->
-<!--            android:name=".DiscoverActivity"-->
-<!--            android:exported="false"-->
-<!--            android:label="@string/title_activity_discover"-->
-<!--            android:theme="@style/Theme.MovieApp" />-->
-        <activity
             android:name=".ChangeLanguage"
             android:exported="false"
             android:theme="@style/Theme.MovieApp" />
@@ -58,10 +52,6 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-<!--                 <category android:name="android.intent.category.LAUNCHER" />-->
             </intent-filter>
         </activity>
     </application>
