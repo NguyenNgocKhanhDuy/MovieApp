@@ -67,8 +67,8 @@ public class MovieFragment extends Fragment {
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2)); // 2 items per row
 
         moreBtn = view.findViewById(R.id.more);
-        searchBar = view.findViewById(R.id.search_bar);
-        searchBtn = view.findViewById(R.id.searchbtn);
+//        searchBar = view.findViewById(R.id.search_bar);
+//        searchBtn = view.findViewById(R.id.searchbtn);
 
         movieList = new ArrayList<>();
         categories = "all";
@@ -120,14 +120,30 @@ public class MovieFragment extends Fragment {
             }
         });
 
-        searchBtn.setOnClickListener(new View.OnClickListener() {
+//        searchBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                movieList.clear();
+//                limit = 10;
+//                categories = "";
+//                String keyword = searchBar.getText().toString().trim();
+//                updateMovies(categories, keyword, limit, view);
+//            }
+//        });
+        SearchView searchView = view.findViewById(R.id.search_view);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public void onClick(View v) {
+            public boolean onQueryTextSubmit(String query) {
                 movieList.clear();
                 limit = 10;
                 categories = "";
-                String keyword = searchBar.getText().toString().trim();
-                updateMovies(categories, keyword, limit, view);
+                updateMovies(categories, query, limit, view);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
             }
         });
 
