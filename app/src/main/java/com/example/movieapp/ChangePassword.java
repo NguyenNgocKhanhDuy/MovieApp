@@ -40,7 +40,6 @@ public class ChangePassword extends AppCompatActivity {
         newPass = findViewById(R.id.newPass);
         confirmPass = findViewById(R.id.confirmPass);
         changeBtn = findViewById(R.id.change);
-
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
