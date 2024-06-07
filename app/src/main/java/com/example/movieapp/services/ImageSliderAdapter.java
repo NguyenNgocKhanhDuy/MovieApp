@@ -21,17 +21,18 @@
     import com.example.movieapp.MovieDetailActivity;
     import com.example.movieapp.R;
     import com.example.movieapp.model.api.Movie;
+    import com.example.movieapp.model.api.MovieDetail;
 
     import java.util.List;
     
     public class ImageSliderAdapter extends RecyclerView.Adapter<ImageSliderAdapter.ViewHolder> {
-        private List<Movie> imageUrls;
+        private List<MovieDetail> imageUrls;
         private Context context;
     
         private LinearLayout watch;
     
     
-        public ImageSliderAdapter(Context context, List<Movie> imageUrls) {
+        public ImageSliderAdapter(Context context, List<MovieDetail> imageUrls) {
             this.context = context;
             this.imageUrls = imageUrls;
         }
@@ -50,7 +51,7 @@
                 public void onClick(View v) {
                     int pos = (int) v.getTag();
                     Intent intent = new Intent(context, MovieDetailActivity.class);
-                    Movie movie = imageUrls.get(pos);
+                    MovieDetail movie = imageUrls.get(pos);
                     Bundle bundle = new Bundle();
                     bundle.putString("slug", movie.getSlug());
                     intent.putExtra("bundle", bundle);

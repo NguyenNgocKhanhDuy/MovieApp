@@ -1,5 +1,6 @@
 package com.example.movieapp;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,15 +10,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.movieapp.model.api.Movie;
+import com.bumptech.glide.Glide;
+import com.example.movieapp.model.api.MovieDetail;
+import com.example.movieapp.model.db.Movie;
 
 import java.util.List;
 
-public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewHolder> {
+public class MoviesDetailAdapter extends RecyclerView.Adapter<MoviesDetailAdapter.MovieViewHolder> {
 
     private List<Movie> movieList;
-
-    public MoviesAdapter(List<Movie> movieList) {
+    private Context context;
+    public MoviesDetailAdapter(Context context, List<Movie> movieList) {
+        this.context = context;
         this.movieList = movieList;
     }
 
@@ -32,8 +36,9 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
     public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
         Movie movie = movieList.get(position);
         holder.title.setText(movie.getName());
-        holder.year.setText(movie.getYear());
-//        holder.poster.setImageResource(movie.getPosterURL());
+        Glide.with(context)
+                .load(movie.getImage())
+                .into(holder.poster);
     }
 
     @Override
@@ -45,13 +50,14 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
 
         ImageView poster;
         TextView title;
-        TextView year;
-
         public MovieViewHolder(@NonNull View itemView) {
             super(itemView);
-            poster = itemView.findViewById(R.id.poster);
-            title = itemView.findViewById(R.id.title);
-            year = itemView.findViewById(R.id.year);
+           poster = itemView.findViewById(R.id.movie_poster);
+            title = itemView.findViewById(R.id.movie_title);
         }
+    }
+    public void updateMovies(List<Movie> movies) {
+        this.movieList = movies;
+        notifyDataSetChanged();
     }
 }
