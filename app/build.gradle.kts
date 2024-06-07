@@ -55,7 +55,6 @@ android {
 }
 
 dependencies {
-
     implementation ("de.hdodenhof:circleimageview:3.1.0")
     implementation ("androidx.recyclerview:recyclerview:1.3.2")
 
@@ -99,7 +98,7 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:32.8.0"))
 
 
-    dependencies {
+
     implementation("androidx.appcompat:appcompat:1.4.0")
     implementation("androidx.activity:activity:1.2.3")
     implementation("androidx.constraintlayout:constraintlayout:2.1.0")
@@ -121,14 +120,17 @@ dependencies {
 
     implementation("com.android.support:multidex:1.0.3")
     implementation("androidx.viewpager2:viewpager2:1.0.0")
-    implementation("com.github.bumptech.glide:glide:4.12.0")
-    annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
-    }
+    
+
     implementation("androidx.recyclerview:recyclerview")
+    implementation("com.google.android.flexbox:flexbox:3.0.0")
+
     implementation ("com.github.bumptech.glide:glide:4.16.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
     implementation ("de.hdodenhof:circleimageview:3.1.0")
     androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation(libs.ui.test.junit4)
     debugImplementation(libs.ui.tooling)
     debugImplementation(libs.ui.test.manifest)
+
 }
