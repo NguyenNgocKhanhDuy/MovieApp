@@ -7,14 +7,14 @@ import java.util.List;
 public class ListMovieStatusBoolean {
     private boolean status;
     @SerializedName("items")
-    private List<Movie> movie;
+    private List<MovieDetail> movie;
     @SerializedName("pagination")
     private PageInfo pageInfo;
 
     public ListMovieStatusBoolean() {
     }
 
-    public ListMovieStatusBoolean(boolean status, List<Movie> movie, PageInfo pageInfo) {
+    public ListMovieStatusBoolean(boolean status, List<MovieDetail> movie, PageInfo pageInfo) {
         this.status = status;
         this.movie = movie;
         this.pageInfo = pageInfo;
@@ -28,11 +28,11 @@ public class ListMovieStatusBoolean {
         this.status = status;
     }
 
-    public List<Movie> getMovie() {
+    public List<MovieDetail> getMovie() {
         return movie;
     }
 
-    public void setMovie(List<Movie> movie) {
+    public void setMovie(List<MovieDetail> movie) {
         this.movie = movie;
     }
 

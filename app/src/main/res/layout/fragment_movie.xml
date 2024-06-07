@@ -31,6 +31,12 @@
         android:drawableStart="@drawable/ic_search"
         android:drawablePadding="10dp" />
 
+    <android.widget.Button
+        android:id="@+id/searchbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="search"/>
+
     <!-- Categories -->
     <LinearLayout
         android:layout_width="match_parent"
@@ -40,40 +46,50 @@
         android:paddingHorizontal="16dp">
 
         <TextView
-            android:id="@+id/tab_movies"
+            android:id="@+id/tab_all"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
-            android:text="Movies"
+            android:text="Tất cả"
             android:textColor="#FFFFFF"
-            android:textSize="16sp"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tab_tv_series"
+            android:id="@+id/tab_phimle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
-            android:text="Tv Series"
+            android:text="Phim Lẻ"
             android:textColor="#888888"
-            android:textSize="16sp" />
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tab_documentary"
+            android:id="@+id/tab_phimbo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
-            android:text="Documentary"
+            android:text="Phim Bộ"
             android:textColor="#888888"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
 
         <TextView
-            android:id="@+id/tab_sports"
+            android:id="@+id/tab_hoathinh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sports"
+            android:layout_marginEnd="24dp"
+            android:text="Hoạt Hình"
             android:textColor="#888888"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tab_tvshows"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tv Shows"
+            android:textColor="#888888"
+            android:textSize="15sp" />
     </LinearLayout>
 
     <!-- Featured Movies -->
@@ -84,4 +100,12 @@
         android:layout_weight="1"
         android:padding="16dp"
         android:orientation="vertical" />
+
+    <android.widget.Button
+        android:id="@+id/more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="thêm"
+        android:layout_gravity="center"
+        />
 </LinearLayout>
