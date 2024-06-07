@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="#121212"
     tools:context=".MovieFragment">
@@ -18,24 +19,36 @@
         android:textSize="36sp" />
 
     <!-- Search Bar -->
-    <EditText
-        android:id="@+id/search_bar"
+<!--    <EditText-->
+<!--        android:id="@+id/search_bar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginHorizontal="16dp"-->
+<!--        android:background="@drawable/input_background"-->
+<!--        android:hint="Sherlock Holmes"-->
+<!--        android:padding="12dp"-->
+<!--        android:textColor="#FFFFFF"-->
+<!--        android:textColorHint="#888888"-->
+<!--        android:drawableStart="@drawable/ic_search"-->
+<!--        android:drawablePadding="10dp" />-->
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/search_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:background="@drawable/input_background"
-        android:hint="Sherlock Holmes"
+        android:background="@drawable/btn_bg"
         android:padding="12dp"
         android:textColor="#FFFFFF"
-        android:textColorHint="#888888"
-        android:drawableStart="@drawable/ic_search"
-        android:drawablePadding="10dp" />
+        android:textColorHint="#FFFFFF"
+        android:iconifiedByDefault="false"
+        app:iconifiedByDefault="false" />
 
-    <android.widget.Button
-        android:id="@+id/searchbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="search"/>
+
+    <!--    <android.widget.Button-->
+<!--        android:id="@+id/searchbtn"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="search"/>-->
 
     <!-- Categories -->
     <LinearLayout
