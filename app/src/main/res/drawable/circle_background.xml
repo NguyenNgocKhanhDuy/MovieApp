@@ -4,7 +4,7 @@
     <!-- Circle background -->
     <item>
         <shape android:shape="oval">
-            <solid android:color="#66000000" /> <!-- Semi-transparent background -->
+            <solid android:color="@color/custom_color" /> <!-- Semi-transparent background -->
         </shape>
     </item>
 
