@@ -53,7 +53,7 @@
             android:textColor="#ffffff"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:text="Star Wars: The Last Jedi"/>
+            android:text=""/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -73,7 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#9494a1"
-                android:text="152 minutes"/>
+                android:text=""/>
 
             <ImageView
                 android:layout_width="20dp"
@@ -87,7 +87,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#9494a1"
-                android:text="7.0 (IMBd)"/>
+                android:text=""/>
         </LinearLayout>
         <View
             android:layout_width="match_parent"
@@ -117,7 +117,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#9494a1"
-                android:text="December 9, 2017"/>
+                android:text=""/>
         </LinearLayout>
 
         <LinearLayout
@@ -136,7 +136,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#9494a1"
-                android:text="Action"/>
+                android:text=""/>
         </LinearLayout>
     </LinearLayout>
 
@@ -161,7 +161,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:textColor="#9494a1"
-            android:text="Rey (Daisy Ro finth Thcludingggggggg Leia, Finn Read more.."/>
+            android:text=""/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -176,7 +176,7 @@
             android:id="@+id/actor"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Luke Skywalkc Guinness"
+            android:text=""
             android:textSize="16dp"
             android:textColor="#9494a1"/>
 
