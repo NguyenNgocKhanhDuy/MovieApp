@@ -14,7 +14,6 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.movieapp.databinding.ActivityChangeLanguageBinding;
 
 public class ChangeLanguage extends AppCompatActivity {
     private ImageView back;
