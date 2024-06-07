@@ -31,7 +31,6 @@ import com.example.movieapp.model.api.Movie;
 import com.example.movieapp.model.api.MovieItem;
 import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.DefaultLoadControl;
-import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.MediaItem;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
@@ -85,7 +84,7 @@ public class MovieDetailActivity extends AppCompatActivity {
 
 
 //    private RecyclerView recyclerRelatedMovies;
-    private MoviesAdapter relatedMoviesAdapter;
+    private MoviesDetailAdapter relatedMoviesAdapter;
     private List<Movie> relatedMovieList;
 
     @SuppressLint("MissingInflatedId")
