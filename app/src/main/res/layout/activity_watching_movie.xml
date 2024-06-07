@@ -21,13 +21,51 @@
             android:src="@drawable/back"
             android:layout_marginBottom="40px"/>
 
-        <com.google.android.exoplayer2.ui.PlayerView
-            android:id="@+id/exoplayer"
+        <TextView
+            android:id="@+id/name"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:gravity="center"
-            app:controller_layout_id="@layout/exo_playback_control_view"/>
+            android:layout_height="wrap_content"
+            android:text="Tên phim"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:padding="10dp"
+            />
 
+<!--        <com.google.android.exoplayer2.ui.PlayerView-->
+<!--            android:id="@+id/exoplayer"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="200dp"-->
+<!--            android:gravity="center"-->
+<!--            app:controller_layout_id="@layout/exo_playback_control_view"/>-->
+
+        <FrameLayout
+                    android:id="@+id/main_media_frame"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5"
+                    android:background="#000000"
+                    android:layout_marginBottom="50dp"
+                    >
+
+                    <com.google.android.exoplayer2.ui.PlayerView
+                        android:id="@+id/exoplayer"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:gravity="center"
+                        app:controller_layout_id="@layout/exo_playback_control_view"/>
+
+                </FrameLayout>
+
+        <TextView
+            android:id="@+id/episodeCurrent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:padding="10dp"
+            />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -58,71 +96,65 @@
             android:background="#3a3a3e"
             android:layout_margin="15dp"
             />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Tên phim"
-            android:textColor="@color/white"
-            android:textSize="30dp"
-            android:textStyle="bold"
-            android:padding="10dp"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Mô tả phim"
-            android:textColor="#9494a1"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:padding="10dp"
-            />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#3a3a3e"
-            android:layout_margin="15dp"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Diễn viên"
-            android:textColor="@color/white"
-            android:textSize="30dp"
-            android:textStyle="bold"
-            android:padding="10dp"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Dan hsach1 siễn viên"
-            android:textColor="#9494a1"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:padding="10dp"
-            />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#3a3a3e"
-            android:layout_margin="15dp"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Thể loại"
-            android:textColor="@color/white"
-            android:textSize="30dp"
-            android:textStyle="bold"
-            android:padding="10dp"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Danh sách các thể loại"
-            android:textColor="#9494a1"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:padding="10dp"
-            />
+<!--        <TextView-->
+<!--            android:id="@+id/content"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Mô tả phim"-->
+<!--            android:textColor="#9494a1"-->
+<!--            android:textSize="20dp"-->
+<!--            android:textStyle="bold"-->
+<!--            android:padding="10dp"-->
+<!--            />-->
+<!--        <View-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:background="#3a3a3e"-->
+<!--            android:layout_margin="15dp"-->
+<!--            />-->
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Diễn viên"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textSize="30dp"-->
+<!--            android:textStyle="bold"-->
+<!--            android:padding="10dp"-->
+<!--            />-->
+<!--        <TextView-->
+<!--            android:id="@+id/actor"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Dan hsach1 siễn viên"-->
+<!--            android:textColor="#9494a1"-->
+<!--            android:textSize="20dp"-->
+<!--            android:textStyle="bold"-->
+<!--            android:padding="10dp"-->
+<!--            />-->
+<!--        <View-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="1dp"-->
+<!--            android:background="#3a3a3e"-->
+<!--            android:layout_margin="15dp"-->
+<!--            />-->
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Thể loại"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textSize="30dp"-->
+<!--            android:textStyle="bold"-->
+<!--            android:padding="10dp"-->
+<!--            />-->
+<!--        <TextView-->
+<!--            android:id="@+id/genre"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Danh sách các thể loại"-->
+<!--            android:textColor="#9494a1"-->
+<!--            android:textSize="20dp"-->
+<!--            android:textStyle="bold"-->
+<!--            android:padding="10dp"-->
+<!--            />-->
     </LinearLayout>
 </ScrollView>
