@@ -1,0 +1,40 @@
+package com.example.movieapp;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+public class AccountFragment extends Fragment {
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_account, container, false);
+
+        View editProfile = view.findViewById(R.id.edit_profile);
+        View changePassword = view.findViewById(R.id.change_password);
+        View notification = view.findViewById(R.id.notify);
+        View security = view.findViewById(R.id.security);
+        View language = view.findViewById(R.id.language);
+        View legal = view.findViewById(R.id.legal);
+        View help = view.findViewById(R.id.help);
+        View logout = view.findViewById(R.id.logout);
+        editProfile.setOnClickListener(View ->{
+            startActivity(new Intent(getActivity(), EditProfile.class));
+        });
+        changePassword.setOnClickListener(View ->{
+            startActivity(new Intent(getActivity(), ChangePassword.class));
+        });
+        language.setOnClickListener(View ->{
+            startActivity(new Intent(getActivity(), ChangeLanguage.class));
+        });
+
+
+        return view;
+    }
+}

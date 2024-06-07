@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="white">#FFFFFF</color>
+    <color name="Item_checked">#ff8f71</color>
+    <color name="item">#3c3c44</color>
+    <color name="red">#F44336</color>
+    <color name="blue">#F44336</color>
+    <color name="background">#15141f</color>
+    <color name="orText">#fb765a</color>
+    <color name="custom_color">#D3D3D3</color>
 </resources>
