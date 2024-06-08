@@ -2,7 +2,16 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
+      <entry key="HistoryActivity">
+        <State />
+      </entry>
       <entry key="Login">
+        <State />
+      </entry>
+      <entry key="MainActivity">
+        <State />
+      </entry>
+      <entry key="MovieDetailActivity">
         <State />
       </entry>
       <entry key="SearchFilm">
