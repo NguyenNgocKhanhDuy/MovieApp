@@ -7,10 +7,12 @@ import static com.example.movieapp.R.id.btnlogin;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -70,6 +72,19 @@ public class Login extends AppCompatActivity {
             String password = UserService.getInstance().hashPassword(passwordEditText.getText().toString().trim());
             loginUser(email, password);
         });
+        // Lấy các tham chiếu đến các thành phần trong layout
+        EditText inputPassword = findViewById(R.id.inputPassword);
+        ImageButton passwordToggle = findViewById(R.id.passwordToggle);
+
+
+        passwordToggle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                togglePasswordVisibility(inputPassword, passwordToggle);
+            }
+        });
+
+
     }
 
     private void loginUser(String email, String password) {
@@ -83,5 +98,24 @@ public class Login extends AppCompatActivity {
                         Toast.makeText(Login.this, "Authentication failed", Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+    private boolean isPasswordVisible = false;
+    // Hàm togglePasswordVisibility được sử dụng để thay đổi trạng thái của mật khẩu
+    private void togglePasswordVisibility(EditText passwordField, ImageButton toggleButton) {
+        if (isPasswordVisible) {
+            // Nếu mật khẩu đang hiển thị, ẩn nó lại
+            passwordField.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            toggleButton.setImageResource(R.drawable.ic_visibility);
+        } else {
+            // Nếu mật khẩu đang ẩn, hiển thị nó
+            passwordField.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            toggleButton.setImageResource(R.drawable.ic_visibility_off);
+        }
+
+        // Cập nhật trạng thái của mật khẩu
+        isPasswordVisible = !isPasswordVisible;
+
+        // Di chuyển con trỏ đến cuối
+        passwordField.setSelection(passwordField.getText().length());
     }
 }

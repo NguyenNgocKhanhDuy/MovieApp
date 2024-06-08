@@ -3,10 +3,12 @@ package com.example.movieapp;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -38,7 +40,6 @@ public class ChangePassword extends AppCompatActivity {
         newPass = findViewById(R.id.newPass);
         confirmPass = findViewById(R.id.confirmPass);
         changeBtn = findViewById(R.id.change);
-
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,5 +90,52 @@ public class ChangePassword extends AppCompatActivity {
 //            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
 //            return insets;
 //        });
+        EditText currentPass= findViewById(R.id.currentPass);
+        ImageView currentToggle = findViewById(R.id.passwordToggle);
+        EditText newPass= findViewById(R.id.newPass);
+        ImageView newToggle = findViewById(R.id.newPasswordToggle);
+        EditText confirmPass= findViewById(R.id.confirmPass);
+        ImageView confirmToggle = findViewById(R.id.confirmPasswordToggle);
+
+        currentToggle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                togglePasswordVisibility(currentPass, currentToggle);
+            }
+        });
+        newToggle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                togglePasswordVisibility(newPass, newToggle);
+            }
+        });
+
+
+        confirmToggle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                togglePasswordVisibility(confirmPass, confirmToggle);
+            }
+        }
+        );
+    }
+    private boolean isPasswordVisible = false;
+    // Hàm togglePasswordVisibility được sử dụng để thay đổi trạng thái của mật khẩu
+    private void togglePasswordVisibility(EditText passwordField, ImageView toggleButton) {
+        if (isPasswordVisible) {
+            // Nếu mật khẩu đang hiển thị, ẩn nó lại
+            passwordField.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            toggleButton.setImageResource(R.drawable.ic_visibility);
+        } else {
+            // Nếu mật khẩu đang ẩn, hiển thị nó
+            passwordField.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            toggleButton.setImageResource(R.drawable.ic_visibility_off);
+        }
+
+        // Cập nhật trạng thái của mật khẩu
+        isPasswordVisible = !isPasswordVisible;
+
+        // Di chuyển con trỏ đến cuối
+        passwordField.setSelection(passwordField.getText().length());
     }
 }

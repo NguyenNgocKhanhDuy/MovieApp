@@ -2,11 +2,13 @@ package com.example.movieapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,6 +54,28 @@ public class Register extends AppCompatActivity {
                 registerUser();
             }
         });
+
+        EditText inputPassword = findViewById(R.id.inputPassword);
+        ImageButton passwordToggle = findViewById(R.id.passwordToggle);
+        EditText inputConfirmPassword = findViewById(R.id.inputConfirmPassword);
+        ImageButton confirmPasswordToggle = findViewById(R.id.confirmPasswordToggle);
+
+
+        passwordToggle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                togglePasswordVisibility(inputPassword, passwordToggle);
+            }
+        });
+
+
+        confirmPasswordToggle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                togglePasswordVisibility(inputConfirmPassword, confirmPasswordToggle);
+            }
+        }
+        );
     }
 
     private void registerUser() {
@@ -109,5 +133,25 @@ public class Register extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    private boolean isPasswordVisible = false;
+    // Hàm togglePasswordVisibility được sử dụng để thay đổi trạng thái của mật khẩu
+    private void togglePasswordVisibility(EditText passwordField, ImageButton toggleButton) {
+        if (isPasswordVisible) {
+            // Nếu mật khẩu đang hiển thị, ẩn nó lại
+            passwordField.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            toggleButton.setImageResource(R.drawable.ic_visibility);
+        } else {
+            // Nếu mật khẩu đang ẩn, hiển thị nó
+            passwordField.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            toggleButton.setImageResource(R.drawable.ic_visibility_off);
+        }
+
+        // Cập nhật trạng thái của mật khẩu
+        isPasswordVisible = !isPasswordVisible;
+
+        // Di chuyển con trỏ đến cuối
+        passwordField.setSelection(passwordField.getText().length());
     }
 }

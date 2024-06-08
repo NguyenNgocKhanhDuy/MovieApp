@@ -1,12 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#121212"
+    tools:context=".MovieFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcv_movies"
+    <!-- Header -->
+    <TextView
+        android:id="@+id/header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="Find Movies, Tv series, and more.."
+        android:textColor="#FFFFFF"
+        android:textSize="36sp" />
+
+    <!-- Search Bar -->
+<!--    <EditText-->
+<!--        android:id="@+id/search_bar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginHorizontal="16dp"-->
+<!--        android:background="@drawable/input_background"-->
+<!--        android:hint="Sherlock Holmes"-->
+<!--        android:padding="12dp"-->
+<!--        android:textColor="#FFFFFF"-->
+<!--        android:textColorHint="#888888"-->
+<!--        android:drawableStart="@drawable/ic_search"-->
+<!--        android:drawablePadding="10dp" />-->
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/search_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"/>
+        android:layout_marginHorizontal="16dp"
+        android:background="@drawable/btn_bg"
+        android:padding="12dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:iconifiedByDefault="false"
+        app:iconifiedByDefault="false" />
 
-</RelativeLayout>
+
+    <!--    <android.widget.Button-->
+<!--        android:id="@+id/searchbtn"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="search"/>-->
+
+    <!-- Categories -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp">
+
+        <TextView
+            android:id="@+id/tab_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:text="Tất cả"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tab_phimle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:text="Phim Lẻ"
+            android:textColor="#888888"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tab_phimbo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:text="Phim Bộ"
+            android:textColor="#888888"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tab_hoathinh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:text="Hoạt Hình"
+            android:textColor="#888888"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tab_tvshows"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tv Shows"
+            android:textColor="#888888"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <!-- Featured Movies -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="16dp"
+        android:orientation="vertical" />
+
+    <android.widget.Button
+        android:id="@+id/more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="thêm"
+        android:layout_gravity="center"
+        />
+</LinearLayout>

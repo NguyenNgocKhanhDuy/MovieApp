@@ -1,5 +1,11 @@
 package com.example.movieapp.services;
 
+import static android.content.ContentValues.TAG;
+
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,93 +17,89 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.example.movieapp.MovieDetailActivity;
 import com.example.movieapp.R;
+import com.example.movieapp.model.api.MovieDetail;
 import com.example.movieapp.model.db.Movie;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import de.hdodenhof.circleimageview.CircleImageView;
+//import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MovieAdapter extends  RecyclerView.Adapter<MovieAdapter.MovieViewHolder> implements Filterable {
-    private List<Movie> ListMovies;
-    private List<Movie> ListMoviesOld;
+public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
 
-    public MovieAdapter(List<Movie> listMovies) {
+    private List<MovieDetail> movieList;
+    private Context context;
 
-        this.ListMovies = listMovies;
-        this.ListMoviesOld= listMovies;
+    public MovieAdapter(Context context, List<MovieDetail> movieList) {
+        this.context = context;
+        this.movieList = movieList;
     }
 
     @NonNull
     @Override
     public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-       View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_user,parent,false);
-       return new MovieViewHolder(view);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_movie, parent, false);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, MovieDetailActivity.class);
+                Bundle bundle = new Bundle();
+                String slug = v.getTag().toString();
+                Log.d(TAG, "SLUG: "+slug);
+                bundle.putString("slug", slug);
+                intent.putExtra("bundle", bundle);
+                context.startActivity(intent);
+            }
+        });
+        return new MovieViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
-        Movie movie = ListMovies.get(position);
-        if(movie==null){
-            return;
-        }
-        holder.imgMovie.setImageResource(movie.getImage());
-        holder.tvName.setText(movie.getName());
-        holder.tvAddress.setText(movie.getAddress());
-
+        MovieDetail movie = movieList.get(position);
+        holder.movieTitle.setText(movie.getName());
+        Glide.with(context)
+                .load(movie.getPosterURL())
+                .into(holder.moviePoster);
+        holder.setMoviePosterClickListener(movie.getSlug(), context);
     }
 
     @Override
     public int getItemCount() {
-        if(ListMovies!=null){
-            return ListMovies.size();
-        }
-        return 0;
+        return movieList.size();
     }
 
+    public void updateMovies(List<MovieDetail> movies) {
+        this.movieList = movies;
+        notifyDataSetChanged();
+    }
 
-
-    public class MovieViewHolder    extends RecyclerView.ViewHolder{
-        private ImageView imgMovie;
-        private TextView tvName;
-        private TextView tvAddress;
+    public static class MovieViewHolder extends RecyclerView.ViewHolder {
+        ImageView moviePoster;
+        TextView movieTitle;
 
         public MovieViewHolder(@NonNull View itemView) {
             super(itemView);
-            imgMovie = itemView.findViewById(R.id.img_movie);
-            tvName=itemView.findViewById(R.id.tv_name);
-            tvAddress=itemView.findViewById(R.id.tv_address);
+            moviePoster = itemView.findViewById(R.id.movie_poster);
+            movieTitle = itemView.findViewById(R.id.movie_title);
+        }
+
+        public void setMoviePosterClickListener(final String slug, Context context) {
+            moviePoster.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, MovieDetailActivity.class);
+                    Bundle bundle = new Bundle();
+                    Log.d(TAG, "SLUG: " + slug);
+                    bundle.putString("slug", slug);
+                    intent.putExtra("bundle", bundle);
+                    context.startActivity(intent);
+                }
+            });
         }
     }
-    @Override
-    public Filter getFilter() {
-        return new Filter() {
-            @Override
-            protected FilterResults performFiltering(CharSequence constraint) {
-               //Keyword seach tren search View
-                String strSearch = constraint.toString();
-                if(strSearch.isEmpty()){
-                    ListMovies= ListMoviesOld;
-                }else {
-                    List<Movie> list = new ArrayList<>();
-                    for (Movie movie: ListMoviesOld){
-                        if (movie.getName().toLowerCase().contains(strSearch.toLowerCase())){
-                            list.add(movie);
-                        }
-                    }
-                    ListMovies=list;
-                }
-                FilterResults filterResults = new FilterResults();
-                filterResults.values= ListMovies;
-                return filterResults;
-            }
-
-            @Override
-            protected void publishResults(CharSequence constraint, FilterResults results) {
-                ListMovies=(List<Movie>) results.values;
-                notifyDataSetChanged();
-            }
-        };
-    }
 }
+

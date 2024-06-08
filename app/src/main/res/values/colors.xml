@@ -8,5 +8,5 @@
     <color name="blue">#F44336</color>
     <color name="background">#15141f</color>
     <color name="orText">#fb765a</color>
-
+    <color name="custom_color">#D3D3D3</color>
 </resources>

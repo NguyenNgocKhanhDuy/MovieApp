@@ -47,6 +47,10 @@ public class Movie implements Serializable{
         thumbURL = in.readString();
         year = in.readInt();
     }
+    public Movie(String title, String poster) {
+        this.name = title;
+        this.posterURL = poster;
+    }
 
 
     public Time getTime() {
