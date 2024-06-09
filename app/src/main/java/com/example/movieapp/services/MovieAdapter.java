@@ -20,8 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.movieapp.MovieDetailActivity;
 import com.example.movieapp.R;
+import com.example.movieapp.model.api.Movie;
 import com.example.movieapp.model.api.MovieDetail;
-import com.example.movieapp.model.db.Movie;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +37,14 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         this.context = context;
         this.movieList = movieList;
     }
+
+    public MovieAdapter(List<MovieDetail> movieHistoryList) {
+    }
+
+
+
+
+
 
     @NonNull
     @Override

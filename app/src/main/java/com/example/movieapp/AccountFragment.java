@@ -1,5 +1,6 @@
 package com.example.movieapp;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -24,6 +25,7 @@ public class AccountFragment extends Fragment {
         View legal = view.findViewById(R.id.legal);
         View help = view.findViewById(R.id.help);
         View logout = view.findViewById(R.id.logout);
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) View history = view.findViewById(R.id.history);
         editProfile.setOnClickListener(View ->{
             startActivity(new Intent(getActivity(), EditProfile.class));
         });
@@ -32,6 +34,9 @@ public class AccountFragment extends Fragment {
         });
         language.setOnClickListener(View ->{
             startActivity(new Intent(getActivity(), ChangeLanguage.class));
+        });
+        history.setOnClickListener(View -> {
+            startActivity(new Intent(getActivity(), HistoryActivity.class));
         });
 
 

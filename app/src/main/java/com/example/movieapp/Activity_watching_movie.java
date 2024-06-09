@@ -108,7 +108,7 @@ public class Activity_watching_movie extends AppCompatActivity {
                 if (movieItem != null && movieItem.isStatus()){
                     tvName.setText(movieItem.getMovieDetail().getName());
                     numberOfButtons = movieItem.getEpisodes().get(0).getEpisodeItem().size();
-                    createButtons(numberOfButtons);
+                    createButtons(numberOfButtons,movieItem);
                 }
             }
 
@@ -186,7 +186,7 @@ public class Activity_watching_movie extends AppCompatActivity {
     }
 
 
-    private void createButtons(int numberOfButtons) {
+    private void createButtons(int numberOfButtons, MovieItem movieItem) {
         for (int i = 0; i < numberOfButtons; i++) {
             Button button = new Button(this);
 
@@ -210,7 +210,8 @@ public class Activity_watching_movie extends AppCompatActivity {
             button.setLayoutParams(params);
 
             // Thiết lập các thuộc tính khác cho Button
-            button.setText("Tập " + (i + 1));
+//            button.setText("Tập " + (i + 1));
+            button.setText(movieItem.getEpisodes().get(0).getEpisodeItem().get(i).getName());
             button.setTag(i);
             button.setTextColor(getResources().getColor(R.color.background));
             button.setBackgroundResource(R.color.Item_checked);
