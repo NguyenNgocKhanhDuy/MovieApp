@@ -4,7 +4,10 @@ import static android.content.ContentValues.TAG;
 
 import android.util.Log;
 
+import com.example.movieapp.model.api.MovieDetail;
+import com.example.movieapp.model.api.MovieItem;
 import com.example.movieapp.model.db.User;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,7 +31,21 @@ public class UserDao {
     }
 
     public void insertUser(User user) {
-        userRef.push().setValue(user);
+        String path = user.getEmail().replaceAll("\\.", "");
+        userRef.child(path).setValue(user);
+    }
+
+    public void insertUserHistoryMovie(FirebaseUser user, MovieDetail movieDetail) {
+        String path = user.getEmail().replaceAll("\\.", "");
+        DatabaseReference listRef = userRef.child(path).child("slugMovieWatch");
+        String slug = movieDetail.getSlug();
+        listRef.child(slug).setValue(slug);
+    }
+
+    public void getListHistoryMovie(FirebaseUser user, ValueEventListener listener) {
+        String path = user.getEmail().replaceAll("\\.", "");
+        DatabaseReference listRef = userRef.child(path).child("slugMovieWatch");
+        listRef.addListenerForSingleValueEvent(listener);
     }
 
     public List<User> selectAllUser(FirebaseCallback callback) {

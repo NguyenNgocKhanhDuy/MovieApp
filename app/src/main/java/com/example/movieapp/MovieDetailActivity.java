@@ -5,6 +5,7 @@ import static android.content.ContentValues.TAG;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -33,6 +34,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
 import com.example.movieapp.api.APIService;
+import com.example.movieapp.dao.UserDao;
 import com.example.movieapp.model.api.Category;
 import com.example.movieapp.model.api.Movie;
 import com.example.movieapp.model.api.MovieDetail;
@@ -50,15 +52,24 @@ import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource;
 import com.google.android.exoplayer2.util.MimeTypes;
 import com.google.android.exoplayer2.util.Util;
+
+import com.google.firebase.Firebase;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.FullscreenListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
+import com.google.gson.Gson;
+
+
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import kotlin.Unit;
 import kotlin.jvm.functions.Function0;
@@ -76,6 +87,9 @@ public class MovieDetailActivity extends AppCompatActivity {
     private TextView movieReleaseDate;
     private TextView movieGenre;
     private TextView movieSynopsis, movieActor;
+
+    private MovieItem currentMovie;
+
 //    private WebView trailer;
 //    private FrameLayout videoContainer;
 
@@ -159,14 +173,21 @@ public class MovieDetailActivity extends AppCompatActivity {
 
 
         APIService.apiService.callMovieDetail(slug).enqueue(new Callback<MovieItem>() {
+            @SuppressLint("SuspiciousIndentation")
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onResponse(Call<MovieItem> call, Response<MovieItem> response) {
                 MovieItem movieItem = response.body();
                 Log.d(TAG, "Movie: "+movieItem.getMovieDetail());
                 if (movieItem != null && movieItem.isStatus()){
+
                     String trailerUrl = movieItem.getMovieDetail().getTrailerURL();
                     if (trailerUrl.equals("")) {
+
+                    currentMovie = movieItem;
+//                    String trailerUrl = movieItem.getMovieDetail().getTrailerURL();
+//                    if (trailerUrl.equals("")) {
+
                         Glide.with(MovieDetailActivity.this).load(movieItem.getMovieDetail().getThumbURL()).into(moviePoster);
                         youTubePlayerView.setVisibility(View.GONE);
                     }else {
@@ -274,16 +295,28 @@ public class MovieDetailActivity extends AppCompatActivity {
 //        movieReleaseDate.setText("December 9, 2017");
 //        movieGenre.setText("Action, Sci-Fi");
 //        movieSynopsis.setText("Rey (Daisy Ridley) finally manages to find the legendary Jedi knight, Luke Skywalker (Mark Hamill) on an island with a magical aura. The heroes of The Force Awakens including Leia, Finn...");
+
         // Play button click listener
+
         Button playButton;
         playButton = findViewById(R.id.play_button);
+
+//        View playButton;
+//        playButton = findViewById(R.id.play_button);
+//        playButton.setOnClickListener(v -> {
+//        Button playButton = findViewById(R.id.play_button);
+
         playButton.setOnClickListener(v -> {
-            // Code to start video playback or navigate to video player
-            Toast.makeText(MovieDetailActivity.this, "Play button clicked", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(MovieDetailActivity.this, Activity_watching_movie.class);
-            bundle.putString("slug", slug);
-            intent.putExtra("bundle", bundle);
-            startActivity(intent);
+            if (currentMovie != null) {
+//                // Lưu thông tin phim vào lịch sử xem
+                saveToHistory(currentMovie.getMovieDetail());
+                // Code to start video playback or navigate to video player
+                Toast.makeText(MovieDetailActivity.this, "Play button clicked", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MovieDetailActivity.this, Activity_watching_movie.class);
+                bundle.putString("slug", slug);
+                intent.putExtra("bundle", bundle);
+                startActivity(intent);
+            }
         });
 
 
@@ -294,6 +327,30 @@ public class MovieDetailActivity extends AppCompatActivity {
             return insets;
         });
 
+    }
+    private void saveToHistory(MovieDetail movieDetail) {
+        // Lấy SharedPreferences
+//        SharedPreferences sharedPreferences = getSharedPreferences("movie_history", MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sharedPreferences.edit();
+//        editor.clear();
+
+        // Chuyển đổi MovieDetail thành JSON
+//        Gson gson = new Gson();
+//        String movieDetailJson = gson.toJson(movieDetail);
+
+        // Lưu JSON vào SharedPreferences
+//        if (sharedPreferences.contains(movieDetail.getSlug())){
+//            editor.remove(movieDetail.getSlug());
+//
+//            editor.putString(movieDetail.getSlug(), movieDetailJson);
+//        }else {
+//        }
+//        editor.putString(movieDetail.getSlug(), movieDetailJson);
+//        editor.apply();
+
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        UserDao.getInstance().insertUserHistoryMovie(user, movieDetail);
     }
 
 //    @Override

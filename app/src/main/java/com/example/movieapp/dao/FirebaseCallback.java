@@ -7,4 +7,6 @@ import java.util.List;
 public interface FirebaseCallback {
     void onDataReceived(User user);
     void onDataReceivedList(List<User> user);
+
+    void onDataReceivedListMovie(List<String> slugs);
 }
