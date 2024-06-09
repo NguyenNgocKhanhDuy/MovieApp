@@ -15,6 +15,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -22,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -48,11 +50,18 @@ import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource;
 import com.google.android.exoplayer2.util.MimeTypes;
 import com.google.android.exoplayer2.util.Util;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.FullscreenListener;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import kotlin.Unit;
+import kotlin.jvm.functions.Function0;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -120,7 +129,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         movieGenre = findViewById(R.id.movie_genre);
         movieSynopsis = findViewById(R.id.movie_synopsis);
         movieActor = findViewById(R.id.actor);
-
+        YouTubePlayerView youTubePlayerView = findViewById(R.id.youtube_player_view);
 
 
         back.setOnClickListener(new View.OnClickListener() {
@@ -156,19 +165,22 @@ public class MovieDetailActivity extends AppCompatActivity {
                 MovieItem movieItem = response.body();
                 Log.d(TAG, "Movie: "+movieItem.getMovieDetail());
                 if (movieItem != null && movieItem.isStatus()){
-//                    String trailerUrl = movieItem.getMovieDetail().getTrailerURL();
-//                    if (trailerUrl.equals("")) {
+                    String trailerUrl = movieItem.getMovieDetail().getTrailerURL();
+                    if (trailerUrl.equals("")) {
                         Glide.with(MovieDetailActivity.this).load(movieItem.getMovieDetail().getThumbURL()).into(moviePoster);
-//                        trailer.setVisibility(View.GONE);
-//                    }else {
-//                        trailer.setVisibility(View.VISIBLE);
-//                        WebSettings webSettings = trailer.getSettings();
-//                        webSettings.setJavaScriptEnabled(true);
-//                        trailer.loadUrl(trailerUrl);
-//                        trailer.setWebViewClient(new WebViewClient());
-//                        moviePoster.setVisibility(View.GONE);
-//
-//                    }
+                        youTubePlayerView.setVisibility(View.GONE);
+                    }else {
+                        getLifecycle().addObserver(youTubePlayerView);
+
+                        youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
+                            @Override
+                            public void onReady(@NonNull YouTubePlayer youTubePlayer) {
+                                String videoId = Youtube.getInstance().extractVideoId(trailerUrl);
+                                youTubePlayer.loadVideo(videoId, 0);
+                            }
+                        });
+                        moviePoster.setVisibility(View.GONE);
+                    }
                     movieTitle.setText(movieItem.getMovieDetail().getName());
                     movieDuration.setText(movieItem.getMovieDetail().getTime());
                     movieRating.setText("No Rating");
@@ -263,7 +275,7 @@ public class MovieDetailActivity extends AppCompatActivity {
 //        movieGenre.setText("Action, Sci-Fi");
 //        movieSynopsis.setText("Rey (Daisy Ridley) finally manages to find the legendary Jedi knight, Luke Skywalker (Mark Hamill) on an island with a magical aura. The heroes of The Force Awakens including Leia, Finn...");
         // Play button click listener
-        View playButton;
+        Button playButton;
         playButton = findViewById(R.id.play_button);
         playButton.setOnClickListener(v -> {
             // Code to start video playback or navigate to video player
