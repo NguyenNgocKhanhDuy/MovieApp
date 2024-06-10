@@ -35,10 +35,9 @@ public class UserDao {
         userRef.child(path).setValue(user);
     }
 
-    public void insertUserHistoryMovie(FirebaseUser user, MovieDetail movieDetail) {
+    public void insertUserHistoryMovie(FirebaseUser user, String slug) {
         String path = user.getEmail().replaceAll("\\.", "");
         DatabaseReference listRef = userRef.child(path).child("slugMovieWatch");
-        String slug = movieDetail.getSlug();
         listRef.child(slug).setValue(slug);
     }
 
