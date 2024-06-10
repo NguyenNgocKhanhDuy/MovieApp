@@ -88,8 +88,8 @@ public class HistoryActivity extends AppCompatActivity {
                                 Log.d(TAG, "OK: "+ movieItem);
                                 if (movieItem != null && movieItem.isStatus()){
                                     movieHistoryList.add(movieItem.getMovieDetail());
+                                    movieAdapter.notifyDataSetChanged();
                                 }
-                                movieAdapter.notifyDataSetChanged();
                             }
 
                             @Override

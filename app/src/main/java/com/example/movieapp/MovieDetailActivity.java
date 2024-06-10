@@ -88,7 +88,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     private TextView movieGenre;
     private TextView movieSynopsis, movieActor;
 
-    private MovieItem currentMovie;
+//    private MovieItem currentMovie;
 
 //    private WebView trailer;
 //    private FrameLayout videoContainer;
@@ -146,6 +146,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         YouTubePlayerView youTubePlayerView = findViewById(R.id.youtube_player_view);
 
 
+
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -184,7 +185,7 @@ public class MovieDetailActivity extends AppCompatActivity {
                     String trailerUrl = movieItem.getMovieDetail().getTrailerURL();
                     if (trailerUrl.equals("")) {
 
-                    currentMovie = movieItem;
+//                    currentMovie = movieItem;
 //                    String trailerUrl = movieItem.getMovieDetail().getTrailerURL();
 //                    if (trailerUrl.equals("")) {
 
@@ -307,16 +308,18 @@ public class MovieDetailActivity extends AppCompatActivity {
 //        Button playButton = findViewById(R.id.play_button);
 
         playButton.setOnClickListener(v -> {
-            if (currentMovie != null) {
+//            if (currentMovie != null) {
 //                // Lưu thông tin phim vào lịch sử xem
-                saveToHistory(currentMovie.getMovieDetail());
+                saveToHistory(slug);
                 // Code to start video playback or navigate to video player
                 Toast.makeText(MovieDetailActivity.this, "Play button clicked", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MovieDetailActivity.this, Activity_watching_movie.class);
                 bundle.putString("slug", slug);
                 intent.putExtra("bundle", bundle);
                 startActivity(intent);
-            }
+//            }else {
+//                Log.d(TAG, "NULL");
+//            }
         });
 
 
@@ -328,7 +331,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         });
 
     }
-    private void saveToHistory(MovieDetail movieDetail) {
+    private void saveToHistory(String slug) {
         // Lấy SharedPreferences
 //        SharedPreferences sharedPreferences = getSharedPreferences("movie_history", MODE_PRIVATE);
 //        SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -350,7 +353,7 @@ public class MovieDetailActivity extends AppCompatActivity {
 
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        UserDao.getInstance().insertUserHistoryMovie(user, movieDetail);
+        UserDao.getInstance().insertUserHistoryMovie(user, slug);
     }
 
 //    @Override
