@@ -4,9 +4,14 @@ import static android.content.ContentValues.TAG;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.example.movieapp.model.api.MovieDetail;
 import com.example.movieapp.model.api.MovieItem;
+import com.example.movieapp.model.db.ImageMovie;
 import com.example.movieapp.model.db.User;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -35,10 +40,11 @@ public class UserDao {
         userRef.child(path).setValue(user);
     }
 
-    public void insertUserHistoryMovie(FirebaseUser user, String slug) {
+    public void insertUserHistoryMovie(FirebaseUser user, String slug, String name, String url) {
         String path = user.getEmail().replaceAll("\\.", "");
         DatabaseReference listRef = userRef.child(path).child("slugMovieWatch");
-        listRef.child(slug).setValue(slug);
+        ImageMovie imageMovie = new ImageMovie(name, url, System.currentTimeMillis());
+        listRef.child(slug).setValue(imageMovie);
     }
 
     public void getListHistoryMovie(FirebaseUser user, ValueEventListener listener) {

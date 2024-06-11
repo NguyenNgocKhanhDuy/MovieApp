@@ -47,7 +47,7 @@
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
             int actualPosition = position % imageUrls.size();
             Glide.with(context)
-                    .load(imageUrls.get(actualPosition).getThumbURL())
+                    .load(imageUrls.get(actualPosition).getPosterURL())
                     .into(holder.imageView);
 
             holder.setImgViewClickListener(imageUrls.get(actualPosition).getSlug(), context);

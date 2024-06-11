@@ -353,7 +353,21 @@ public class MovieDetailActivity extends AppCompatActivity {
 
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        UserDao.getInstance().insertUserHistoryMovie(user, slug);
+        APIService.apiService.callMovieDetail(slug).enqueue(new Callback<MovieItem>() {
+            @Override
+            public void onResponse(Call<MovieItem> call, Response<MovieItem> response) {
+                MovieItem movieItem = response.body();
+
+                if(movieItem != null && movieItem.isStatus()) {
+                    UserDao.getInstance().insertUserHistoryMovie(user, slug, movieItem.getMovieDetail().getName(), movieItem.getMovieDetail().getPosterURL());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MovieItem> call, Throwable throwable) {
+
+            }
+        });
     }
 
 //    @Override
