@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.movieapp.api.APIService;
 import com.example.movieapp.dao.UserDao;
 import com.example.movieapp.model.api.MovieItem;
+import com.example.movieapp.model.db.ImageMovie;
 import com.example.movieapp.services.MovieAdapter;
 import com.example.movieapp.model.api.MovieDetail;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,6 +27,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -78,27 +81,27 @@ public class HistoryActivity extends AppCompatActivity {
         UserDao.getInstance().getListHistoryMovie(user, new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<ImageMovie> imageMovies = new ArrayList<>();
                 for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
-                    String slug = itemSnapshot.getValue(String.class);
-                    if (slug != null) {
-                        APIService.apiService.callMovieDetail(slug).enqueue(new Callback<MovieItem>() {
-                            @Override
-                            public void onResponse(Call<MovieItem> call, Response<MovieItem> response) {
-                                MovieItem movieItem = response.body();
-                                Log.d(TAG, "OK: "+ movieItem);
-                                if (movieItem != null && movieItem.isStatus()){
-                                    movieHistoryList.add(movieItem.getMovieDetail());
-                                    movieAdapter.notifyDataSetChanged();
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(Call<MovieItem> call, Throwable throwable) {
-                                Log.d(TAG, "No OK");
-                            }
-                        });
+                    ImageMovie imageMovie = itemSnapshot.getValue(ImageMovie.class);
+                    if (imageMovie != null) {
+                        imageMovies.add(imageMovie);
                     }
                 }
+                Collections.sort(imageMovies, new Comparator<ImageMovie>() {
+                    @Override
+                    public int compare(ImageMovie o1, ImageMovie o2) {
+                        return Long.compare(o2.getTimeStamp(), o1.getTimeStamp());
+                    }
+                });
+
+                for (ImageMovie i: imageMovies) {
+                    MovieDetail movieDetail = new MovieDetail();
+                    movieDetail.setName(i.getName());
+                    movieDetail.setPosterURL(i.getUrl());
+                    movieHistoryList.add(movieDetail);
+                }
+                movieAdapter.notifyDataSetChanged();
             }
 
             @Override
