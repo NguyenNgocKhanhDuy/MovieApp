@@ -48,6 +48,7 @@ public class Login extends AppCompatActivity {
     private EditText emailEditText;
     private EditText passwordEditText;
     private Button loginButton;
+    private TextView forgotPassword;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,9 +60,12 @@ public class Login extends AppCompatActivity {
         emailEditText = findViewById(R.id.inputEmail);
         passwordEditText = findViewById(R.id.inputPassword);
         loginButton = findViewById(btnlogin);
-
+        forgotPassword = findViewById(R.id.forgotPassword);
         TextView textViewSignUp = findViewById(R.id.textViewSignUp);
-
+        forgotPassword.setOnClickListener(view ->{
+            Intent intent = new Intent(Login.this, SendOTPActivity.class);
+            startActivity(intent);
+        });
         textViewSignUp.setOnClickListener(view -> {
                 // Chuyển sang RegisterActivity
                 Intent intent = new Intent(Login.this, Register.class);
