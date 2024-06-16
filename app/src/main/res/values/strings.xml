@@ -54,6 +54,7 @@
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
     <string name="title_activity_discover">DiscoverActivity</string>
+    <string name="title_activity_create_new_password">activity_create_new_password</string>
 
 
 </resources>
