@@ -134,5 +134,8 @@ dependencies {
     debugImplementation(libs.ui.tooling)
     debugImplementation(libs.ui.test.manifest)
     implementation ("com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0")
-
+    implementation("com.google.firebase:firebase-auth:21.0.8")
+    implementation("com.google.firebase:firebase-storage:20.1.0")
+    implementation("com.github.bumptech.glide:glide:4.13.2")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.13.2")
 }
