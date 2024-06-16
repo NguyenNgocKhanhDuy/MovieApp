@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class AccountFragment extends Fragment {
     @Nullable
     @Override
@@ -37,6 +39,10 @@ public class AccountFragment extends Fragment {
         });
         history.setOnClickListener(View -> {
             startActivity(new Intent(getActivity(), HistoryActivity.class));
+        });
+        logout.setOnClickListener(View -> {
+            FirebaseAuth.getInstance().signOut();
+            getActivity().finish();
         });
 
 
