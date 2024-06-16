@@ -78,6 +78,10 @@
             android:background="?attr/selectableItemBackground"
             android:paddingVertical="16dp"
             android:layout_marginBottom="24dp" />
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@color/background">
 
         <com.google.android.flexbox.FlexboxLayout
             android:id="@+id/flexbox_button_container"
@@ -90,6 +94,7 @@
             android:paddingTop="10dp"
             android:paddingLeft="10dp">
         </com.google.android.flexbox.FlexboxLayout>
+        </ScrollView>
 
         <View
             android:layout_width="match_parent"

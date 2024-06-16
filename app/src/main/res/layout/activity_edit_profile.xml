@@ -2,7 +2,8 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -36,6 +37,15 @@
             android:src="@drawable/user"
             android:layout_marginBottom="16dp"/>
 
+        <Button
+            android:id="@+id/btn_changed_avatar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nhấn để đổi ảnh đại diện"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/Item_checked"
+            android:textColor="@color/background"
+           />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -61,7 +71,7 @@
                     <EditText
                         android:id="@+id/username"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="50dp"
                         android:paddingStart="12dp"
                         android:text="mohitrao19"
                         android:textSize="16sp"
@@ -137,8 +147,10 @@
                     android:id="@+id/save"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/black"
                     android:text="Save Changes"
-                    android:textColor="@android:color/white" />
+                    android:backgroundTint="@color/Item_checked"
+                    android:textColor="@color/background"
+
+                     />
             </LinearLayout>
         </ScrollView>
