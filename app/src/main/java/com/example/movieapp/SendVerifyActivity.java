@@ -16,7 +16,7 @@ import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseAuthRecentLoginRequiredException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 
-public class SendOTPActivity extends AppCompatActivity {
+public class SendVerifyActivity extends AppCompatActivity {
 
     private EditText etEmail;
     private Button btnSendResetEmail;
@@ -50,19 +50,19 @@ public class SendOTPActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(SendOTPActivity.this, "Reset email sent!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SendVerifyActivity.this, "Reset email sent!", Toast.LENGTH_SHORT).show();
                             onCodeSent(userEmail); // Gọi hàm onCodeSent khi gửi email thành công
                         } else {
                             // Xử lý các ngoại lệ Firebase Auth
                             Exception exception = task.getException();
                             if (exception instanceof FirebaseAuthInvalidUserException) {
-                                Toast.makeText(SendOTPActivity.this, "Email address not found", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SendVerifyActivity.this, "Email address not found", Toast.LENGTH_SHORT).show();
                             } else if (exception instanceof FirebaseAuthRecentLoginRequiredException) {
-                                Toast.makeText(SendOTPActivity.this, "Recent login is required", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SendVerifyActivity.this, "Recent login is required", Toast.LENGTH_SHORT).show();
                             } else if (exception instanceof FirebaseAuthUserCollisionException) {
-                                Toast.makeText(SendOTPActivity.this, "User already exists", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SendVerifyActivity.this, "User already exists", Toast.LENGTH_SHORT).show();
                             } else {
-                                Toast.makeText(SendOTPActivity.this, "Failed to send reset email. " + exception.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SendVerifyActivity.this, "Failed to send reset email. " + exception.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
@@ -70,8 +70,10 @@ public class SendOTPActivity extends AppCompatActivity {
     }
 
     private void onCodeSent(String email) {
-        Intent intent = new Intent(SendOTPActivity.this, OTPActivity.class);
-        intent.putExtra("userEmail", email);
+        Intent intent = new Intent(SendVerifyActivity.this, VerifyActivity.class);
+        intent.putExtra("email", email);
+        intent.putExtra("forgot",true);
         startActivity(intent);
+        finish();
     }
 }

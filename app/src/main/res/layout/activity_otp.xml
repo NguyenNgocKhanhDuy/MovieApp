@@ -12,7 +12,7 @@
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="OTP Verification"
+        android:text="Email Verification"
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_marginTop="16dp"
@@ -23,64 +23,64 @@
         android:id="@+id/tvDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="We've just sent you a 4 digits code to your phone number"
+        android:text="We've just sent a verification to your Email! Please check!"
         android:textSize="16sp"
         android:layout_marginTop="16dp"
         android:layout_gravity="center_horizontal"
         android:textAlignment="center"/>
 
     <!-- Hàng các trường nhập OTP -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="32dp">
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:gravity="center"-->
+<!--        android:layout_marginTop="32dp"-->
+<!--        android:layout_marginBottom="32dp">-->
 
-        <EditText
-            android:id="@+id/etOtpDigit1"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:maxLength="1"
-            android:textSize="24sp"
-            android:gravity="center"
-            android:background="@drawable/otp_edit_text_background"
-            android:layout_marginEnd="8dp"/>
+<!--        <EditText-->
+<!--            android:id="@+id/etOtpDigit1"-->
+<!--            android:layout_width="50dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:inputType="number"-->
+<!--            android:maxLength="1"-->
+<!--            android:textSize="24sp"-->
+<!--            android:gravity="center"-->
+<!--            android:background="@drawable/otp_edit_text_background"-->
+<!--            android:layout_marginEnd="8dp"/>-->
 
-        <EditText
-            android:id="@+id/etOtpDigit2"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:maxLength="1"
-            android:textSize="24sp"
-            android:gravity="center"
-            android:background="@drawable/otp_edit_text_background"
-            android:layout_marginEnd="8dp"/>
+<!--        <EditText-->
+<!--            android:id="@+id/etOtpDigit2"-->
+<!--            android:layout_width="50dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:inputType="number"-->
+<!--            android:maxLength="1"-->
+<!--            android:textSize="24sp"-->
+<!--            android:gravity="center"-->
+<!--            android:background="@drawable/otp_edit_text_background"-->
+<!--            android:layout_marginEnd="8dp"/>-->
 
-        <EditText
-            android:id="@+id/etOtpDigit3"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:maxLength="1"
-            android:textSize="24sp"
-            android:gravity="center"
-            android:background="@drawable/otp_edit_text_background"
-            android:layout_marginEnd="8dp"/>
+<!--        <EditText-->
+<!--            android:id="@+id/etOtpDigit3"-->
+<!--            android:layout_width="50dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:inputType="number"-->
+<!--            android:maxLength="1"-->
+<!--            android:textSize="24sp"-->
+<!--            android:gravity="center"-->
+<!--            android:background="@drawable/otp_edit_text_background"-->
+<!--            android:layout_marginEnd="8dp"/>-->
 
-        <EditText
-            android:id="@+id/etOtpDigit4"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:maxLength="1"
-            android:textSize="24sp"
-            android:gravity="center"
-            android:background="@drawable/otp_edit_text_background"/>
-    </LinearLayout>
+<!--        <EditText-->
+<!--            android:id="@+id/etOtpDigit4"-->
+<!--            android:layout_width="50dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:inputType="number"-->
+<!--            android:maxLength="1"-->
+<!--            android:textSize="24sp"-->
+<!--            android:gravity="center"-->
+<!--            android:background="@drawable/otp_edit_text_background"/>-->
+<!--    </LinearLayout>-->
 
     <!-- Nút Continue -->
     <Button
@@ -107,17 +107,17 @@
             android:id="@+id/tvDidNotReceiveCode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Didn’t receive the code?"
+            android:text="Didn’t receive the email?"
             android:textSize="14sp"
             android:textColor="@android:color/holo_blue_dark"
             android:layout_gravity="center_horizontal"
             android:textAlignment="center"/>
 
         <TextView
-            android:id="@+id/tvResendCode"
+            android:id="@+id/tvResendEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Resend Code"
+            android:text="Resend Email"
             android:textSize="14sp"
             android:textColor="#0000FF"
             android:layout_gravity="center_horizontal"

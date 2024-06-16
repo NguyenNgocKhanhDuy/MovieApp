@@ -40,12 +40,13 @@ public class AccountFragment extends Fragment {
         history.setOnClickListener(View -> {
             startActivity(new Intent(getActivity(), HistoryActivity.class));
         });
-        logout.setOnClickListener(View -> {
+        logout.setOnClickListener(View ->{
             FirebaseAuth.getInstance().signOut();
-            getActivity().finish();
+           Intent intent = new Intent(getActivity(), MainActivity.class);
+            // Đặt lại cờ để tránh quay lại Fragment khi nhấn nút Back
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
         });
-
-
         return view;
     }
 }

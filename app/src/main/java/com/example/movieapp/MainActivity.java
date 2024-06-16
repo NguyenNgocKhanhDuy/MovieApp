@@ -4,26 +4,19 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.movieapp.services.CustomViewPager;
-import com.example.movieapp.services.ImageSliderAdapter;
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private Button btn;
@@ -74,12 +67,16 @@ public class MainActivity extends AppCompatActivity {
         mNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                boolean loggedIn = getIntent().getBooleanExtra("isLogin",false);
                 if (item.getItemId() == R.id.action_home) {
                     mViewPager.setCurrentItem(0);
                 } else if (item.getItemId() == R.id.action_movie) {
                     mViewPager.setCurrentItem(1);
-                } else if (item.getItemId() == R.id.action_user) {
+                } else if (item.getItemId() == R.id.action_user && loggedIn ) {
                     mViewPager.setCurrentItem(2);
+                }else{
+                    Intent intent = new Intent(MainActivity.this, Login.class);
+                    startActivity(intent);
                 }
                 return true;
             }
@@ -104,8 +101,6 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 2:
                         mNavigationView.getMenu().findItem(R.id.action_user).setChecked(true);
-//                        Intent intent = new Intent(MainActivity.this,Setting.class);
-//                        startActivity(intent);
                         break;
                 }
             }
