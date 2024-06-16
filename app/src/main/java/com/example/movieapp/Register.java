@@ -20,7 +20,6 @@ import com.example.movieapp.services.UserService;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
-import com.example.movieapp.R;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class Register extends AppCompatActivity {
@@ -121,10 +120,18 @@ public class Register extends AppCompatActivity {
                                         Log.w("TAG", "Failed to update display name.", task2.getException());
                                     }
                                 });
-
-                        Toast.makeText(Register.this, "Registration successful", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(Register.this, Login.class);
-                        startActivity(intent);
+                        //gui email xac nhan
+                        user.sendEmailVerification().addOnCompleteListener(task3 -> {
+                            if (task3.isSuccessful()) {
+                                Toast.makeText(Register.this, "Registration successful. Please check your email for verification.", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(Register.this, Login.class);
+                                startActivity(intent);
+                                finish();
+                            } else {
+                                Log.e("TAG", "sendEmailVerification", task3.getException());
+                                Toast.makeText(Register.this, "Failed to send verification email.", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     } else {
                         if (task.getException() instanceof FirebaseAuthUserCollisionException) {
                             Toast.makeText(Register.this, "User with this email already exists.", Toast.LENGTH_SHORT).show();

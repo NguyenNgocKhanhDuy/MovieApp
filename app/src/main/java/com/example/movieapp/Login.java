@@ -1,14 +1,12 @@
 package com.example.movieapp;
 
-import static android.content.ContentValues.TAG;
-import static com.example.movieapp.R.id.btnRegister;
+import static com.example.movieapp.R.id.btn_not_now;
 import static com.example.movieapp.R.id.btnlogin;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,38 +14,18 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.movieapp.dao.UserDao;
-import com.example.movieapp.model.db.User;
 import com.example.movieapp.services.UserService;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.SignInButton;
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.GoogleAuthProvider;
-
-import java.util.List;
+import com.google.firebase.auth.FirebaseUser;
 
 public class Login extends AppCompatActivity {
 
     private FirebaseAuth auth;
     private EditText emailEditText;
     private EditText passwordEditText;
-    private Button loginButton;
+    private Button loginButton, notnowButton;
     private TextView forgotPassword;
     @SuppressLint("MissingInflatedId")
     @Override
@@ -56,20 +34,23 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         auth = FirebaseAuth.getInstance();
-
         emailEditText = findViewById(R.id.inputEmail);
         passwordEditText = findViewById(R.id.inputPassword);
         loginButton = findViewById(btnlogin);
+        notnowButton = findViewById(btn_not_now);
         forgotPassword = findViewById(R.id.forgotPassword);
         TextView textViewSignUp = findViewById(R.id.textViewSignUp);
         forgotPassword.setOnClickListener(view ->{
-            Intent intent = new Intent(Login.this, SendOTPActivity.class);
+            Intent intent = new Intent(Login.this, SendVerifyActivity.class);
             startActivity(intent);
         });
         textViewSignUp.setOnClickListener(view -> {
                 // Chuyển sang RegisterActivity
                 Intent intent = new Intent(Login.this, Register.class);
                 startActivity(intent);
+        });
+        notnowButton.setOnClickListener(view -> {
+            loginGuest();
         });
         loginButton.setOnClickListener(view -> {
             String email = emailEditText.getText().toString().trim();
@@ -92,16 +73,42 @@ public class Login extends AppCompatActivity {
     }
 
     private void loginUser(String email, String password) {
+
+        boolean isLogin = false;
         auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
+                    Bundle bundle = new Bundle();
+                    Intent intent = new Intent(Login.this, MainActivity.class);
                     if (task.isSuccessful()) {
-                        Toast.makeText(Login.this, "Login successful", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(Login.this, MainActivity.class);
-                        startActivity(intent);
+                        FirebaseUser user = auth.getCurrentUser();
+                        if (user != null && user.isEmailVerified()) {
+                            Toast.makeText(Login.this, "Login successful", Toast.LENGTH_SHORT).show();
+                            bundle.putBoolean("isLogin", true);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            auth.signOut();
+                            Toast.makeText(Login.this, "Please verify your email first.", Toast.LENGTH_SHORT).show();
+                            intent = new Intent(Login.this, VerifyActivity.class);
+                            bundle.putString("email",email);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                        }
                     } else {
                         Toast.makeText(Login.this, "Authentication failed", Toast.LENGTH_SHORT).show();
+                        bundle.putBoolean("isLogin",false);
                     }
+
                 });
+    }
+    private void loginGuest(){
+        Bundle bundle = new Bundle();
+        Intent intent = new Intent(Login.this, MainActivity.class);
+        bundle.putBoolean("isLogin",false);
+        intent.putExtras(bundle);
+        startActivity(intent);
+        finish();
     }
     private boolean isPasswordVisible = false;
     // Hàm togglePasswordVisibility được sử dụng để thay đổi trạng thái của mật khẩu

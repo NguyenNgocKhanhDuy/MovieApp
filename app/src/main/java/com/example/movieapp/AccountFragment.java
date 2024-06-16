@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class AccountFragment extends Fragment {
     @Nullable
     @Override
@@ -38,7 +40,13 @@ public class AccountFragment extends Fragment {
         history.setOnClickListener(View -> {
             startActivity(new Intent(getActivity(), HistoryActivity.class));
         });
-
+        logout.setOnClickListener(View ->{
+            FirebaseAuth.getInstance().signOut();
+           Intent intent = new Intent(getActivity(), MainActivity.class);
+            // Đặt lại cờ để tránh quay lại Fragment khi nhấn nút Back
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        });
 
         return view;
     }
