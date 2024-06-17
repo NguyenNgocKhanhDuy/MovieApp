@@ -3,6 +3,7 @@ package com.example.movieapp;
 import static android.content.ContentValues.TAG;
 
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +15,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.movieapp.api.APIService;
+import com.example.movieapp.dao.HistoryMovieDao;
+import com.example.movieapp.dao.MyDataBaseHelper;
 import com.example.movieapp.dao.UserDao;
 import com.example.movieapp.model.api.MovieItem;
 import com.example.movieapp.model.db.ImageMovie;
@@ -77,38 +80,45 @@ public class HistoryActivity extends AppCompatActivity {
 //            Log.d("HistoryActivity", "Loaded movie: " + movieDetail.getName());
 //        }
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        UserDao.getInstance().getListHistoryMovie(user, new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                List<ImageMovie> imageMovies = new ArrayList<>();
-                for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
-                    ImageMovie imageMovie = itemSnapshot.getValue(ImageMovie.class);
-                    if (imageMovie != null) {
-                        imageMovies.add(imageMovie);
-                    }
-                }
-                Collections.sort(imageMovies, new Comparator<ImageMovie>() {
-                    @Override
-                    public int compare(ImageMovie o1, ImageMovie o2) {
-                        return Long.compare(o2.getTimeStamp(), o1.getTimeStamp());
-                    }
-                });
+//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//        UserDao.getInstance().getListHistoryMovie(user, new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                List<ImageMovie> imageMovies = new ArrayList<>();
+//                for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
+//                    ImageMovie imageMovie = itemSnapshot.getValue(ImageMovie.class);
+//                    if (imageMovie != null) {
+//                        imageMovies.add(imageMovie);
+//                    }
+//                }
+//                Collections.sort(imageMovies, new Comparator<ImageMovie>() {
+//                    @Override
+//                    public int compare(ImageMovie o1, ImageMovie o2) {
+//                        return Long.compare(o2.getTimeStamp(), o1.getTimeStamp());
+//                    }
+//                });
+//
+//                for (ImageMovie i: imageMovies) {
+//                    MovieDetail movieDetail = new MovieDetail();
+//                    movieDetail.setName(i.getName());
+//                    movieDetail.setPosterURL(i.getUrl());
+//                    movieHistoryList.add(movieDetail);
+//                }
+//                movieAdapter.notifyDataSetChanged();
+//            }
+//
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
 
-                for (ImageMovie i: imageMovies) {
-                    MovieDetail movieDetail = new MovieDetail();
-                    movieDetail.setName(i.getName());
-                    movieDetail.setPosterURL(i.getUrl());
-                    movieHistoryList.add(movieDetail);
-                }
-                movieAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+        MyDataBaseHelper helper = new MyDataBaseHelper(this);
+        SQLiteDatabase db = helper.getWritableDatabase();
+        HistoryMovieDao historyMovieDao = new HistoryMovieDao(db);
+        movieHistoryList.addAll(historyMovieDao.getAllHistoryMovies());
+        movieAdapter.notifyDataSetChanged();
 
     }
 }
