@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -34,6 +35,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
 import com.example.movieapp.api.APIService;
+import com.example.movieapp.dao.HistoryMovieDao;
+import com.example.movieapp.dao.MyDataBaseHelper;
 import com.example.movieapp.dao.UserDao;
 import com.example.movieapp.model.api.Category;
 import com.example.movieapp.model.api.Movie;
@@ -352,14 +355,34 @@ public class MovieDetailActivity extends AppCompatActivity {
 //        editor.apply();
 
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//        APIService.apiService.callMovieDetail(slug).enqueue(new Callback<MovieItem>() {
+//            @Override
+//            public void onResponse(Call<MovieItem> call, Response<MovieItem> response) {
+//                MovieItem movieItem = response.body();
+//
+//                if(movieItem != null && movieItem.isStatus()) {
+//                    UserDao.getInstance().insertUserHistoryMovie(user, slug, movieItem.getMovieDetail().getName(), movieItem.getMovieDetail().getPosterURL());
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<MovieItem> call, Throwable throwable) {
+//
+//            }
+//        });
+
+        MyDataBaseHelper helper = new MyDataBaseHelper(this);
+        SQLiteDatabase db = helper.getWritableDatabase();
+        HistoryMovieDao historyMovieDao = new HistoryMovieDao(db);
         APIService.apiService.callMovieDetail(slug).enqueue(new Callback<MovieItem>() {
             @Override
             public void onResponse(Call<MovieItem> call, Response<MovieItem> response) {
                 MovieItem movieItem = response.body();
 
                 if(movieItem != null && movieItem.isStatus()) {
-                    UserDao.getInstance().insertUserHistoryMovie(user, slug, movieItem.getMovieDetail().getName(), movieItem.getMovieDetail().getPosterURL());
+                    historyMovieDao.deleteHistoryMovie(movieItem.getMovieDetail().getName());
+                    historyMovieDao.addHistoryMovie(movieItem.getMovieDetail().getName(), movieItem.getMovieDetail().getPosterURL());
                 }
             }
 
@@ -368,6 +391,7 @@ public class MovieDetailActivity extends AppCompatActivity {
 
             }
         });
+
     }
 
 //    @Override
