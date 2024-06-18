@@ -114,10 +114,14 @@ public class HistoryActivity extends AppCompatActivity {
 //            }
 //        });
 
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         MyDataBaseHelper helper = new MyDataBaseHelper(this);
         SQLiteDatabase db = helper.getWritableDatabase();
+
+
         HistoryMovieDao historyMovieDao = new HistoryMovieDao(db);
-        movieHistoryList.addAll(historyMovieDao.getAllHistoryMovies());
+        movieHistoryList.addAll(historyMovieDao.getAllHistoryMovies(user.getEmail()));
+        Log.d(TAG, "T: "+movieHistoryList);
         movieAdapter.notifyDataSetChanged();
 
     }

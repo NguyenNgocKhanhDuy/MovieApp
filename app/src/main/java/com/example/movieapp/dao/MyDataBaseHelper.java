@@ -16,19 +16,20 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    public void deleteDB(Context context) {
+        context.deleteDatabase("Movie.db");
+    }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE User (" +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "email TEXT NOT NULL)");
+//        db.execSQL("CREATE TABLE User (" +
+//                "email TEXT NOT NULL PRIMARY KEY)");
 
         db.execSQL("CREATE TABLE HistoryMovie (" +
-                "idUser INTEGER NOT NULL, " +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "email TEXT NOT NULL, " +
                 "name TEXT NOT NULL, " +
-                "img TEXT NOT NULL," +
-                "PRIMARY KEY (idUser, name), " +
-                "FOREIGN KEY (idUser) REFERENCES User(id) " +
-                "ON DELETE CASCADE)");
+                "img TEXT NOT NULL)" );
     }
 
     @Override
