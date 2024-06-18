@@ -372,6 +372,7 @@ public class MovieDetailActivity extends AppCompatActivity {
 //            }
 //        });
 
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         MyDataBaseHelper helper = new MyDataBaseHelper(this);
         SQLiteDatabase db = helper.getWritableDatabase();
         HistoryMovieDao historyMovieDao = new HistoryMovieDao(db);
@@ -381,8 +382,8 @@ public class MovieDetailActivity extends AppCompatActivity {
                 MovieItem movieItem = response.body();
 
                 if(movieItem != null && movieItem.isStatus()) {
-                    historyMovieDao.deleteHistoryMovie(movieItem.getMovieDetail().getName());
-                    historyMovieDao.addHistoryMovie(movieItem.getMovieDetail().getName(), movieItem.getMovieDetail().getPosterURL());
+                    historyMovieDao.deleteHistoryMovie(movieItem.getMovieDetail().getName(), user.getEmail());
+                    historyMovieDao.addHistoryMovie(movieItem.getMovieDetail().getName(), movieItem.getMovieDetail().getPosterURL(), user.getEmail());
                 }
             }
 
