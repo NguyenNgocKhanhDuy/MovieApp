@@ -5,6 +5,7 @@ import static com.example.movieapp.R.id.btnlogin;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.movieapp.dao.MyDataBaseHelper;
 import com.example.movieapp.services.UserService;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -40,6 +42,8 @@ public class Login extends AppCompatActivity {
         notnowButton = findViewById(btn_not_now);
         forgotPassword = findViewById(R.id.forgotPassword);
         TextView textViewSignUp = findViewById(R.id.textViewSignUp);
+
+
         forgotPassword.setOnClickListener(view ->{
             Intent intent = new Intent(Login.this, SendVerifyActivity.class);
             startActivity(intent);
@@ -88,7 +92,7 @@ public class Login extends AppCompatActivity {
                             startActivity(intent);
                             finish();
                         } else {
-                            auth.signOut();
+//                            auth.signOut();
                             Toast.makeText(Login.this, "Please verify your email first.", Toast.LENGTH_SHORT).show();
                             intent = new Intent(Login.this, VerifyActivity.class);
                             bundle.putString("email",email);

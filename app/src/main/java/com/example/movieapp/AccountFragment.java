@@ -42,9 +42,10 @@ public class AccountFragment extends Fragment {
         });
         logout.setOnClickListener(View ->{
             FirebaseAuth.getInstance().signOut();
-           Intent intent = new Intent(getActivity(), MainActivity.class);
-            // Đặt lại cờ để tránh quay lại Fragment khi nhấn nút Back
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            getActivity().finish();
+           Intent intent = new Intent(getActivity(), Login.class);
+//            // Đặt lại cờ để tránh quay lại Fragment khi nhấn nút Back
+//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         });
         return view;

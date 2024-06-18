@@ -49,7 +49,6 @@
             if (user != null) {
                 user.reload().addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-
                         if (isForgotPassword) {
                             sendPasswordResetEmail(user.getEmail());
                         } else if(!user.isEmailVerified()){

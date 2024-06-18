@@ -383,7 +383,7 @@ public class MovieDetailActivity extends AppCompatActivity {
 
                 if(movieItem != null && movieItem.isStatus()) {
                     historyMovieDao.deleteHistoryMovie(movieItem.getMovieDetail().getName(), user.getEmail());
-                    historyMovieDao.addHistoryMovie(movieItem.getMovieDetail().getName(), movieItem.getMovieDetail().getPosterURL(), user.getEmail());
+                    historyMovieDao.addHistoryMovie(movieItem.getMovieDetail().getSlug(),movieItem.getMovieDetail().getName(), movieItem.getMovieDetail().getPosterURL(), user.getEmail());
                 }
             }
 

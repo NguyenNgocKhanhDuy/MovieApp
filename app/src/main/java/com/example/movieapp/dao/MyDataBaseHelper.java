@@ -28,6 +28,7 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE HistoryMovie (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "email TEXT NOT NULL, " +
+                "slug TEXT NOT NULL, " +
                 "name TEXT NOT NULL, " +
                 "img TEXT NOT NULL)" );
     }
