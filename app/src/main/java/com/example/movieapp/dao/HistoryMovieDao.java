@@ -46,6 +46,8 @@ public class HistoryMovieDao {
     }
 
     public void deleteHistoryMovie(String name, String email) {
-        db.delete("HistoryMovie", "name = ? AND email = ?", new String[]{String.valueOf(name), String.valueOf(email)});
+        String[] selectionArgs = new String[]{email, name};
+        int deletedRows = db.delete("HistoryMovie", "email = ? AND name = ?", selectionArgs);
+        Log.d(TAG, "DEL: "+deletedRows);
     }
 }

@@ -22,16 +22,14 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE User (" +
-                "email TEXT NOT NULL PRIMARY KEY)");
+//        db.execSQL("CREATE TABLE User (" +
+//                "email TEXT NOT NULL PRIMARY KEY)");
 
         db.execSQL("CREATE TABLE HistoryMovie (" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "email TEXT NOT NULL, " +
                 "name TEXT NOT NULL, " +
-                "img TEXT NOT NULL," +
-                "PRIMARY KEY (email, name), " +
-                "FOREIGN KEY (email) REFERENCES User(email) " +
-                "ON DELETE CASCADE)");
+                "img TEXT NOT NULL)" );
     }
 
     @Override

@@ -118,6 +118,7 @@ public class HistoryActivity extends AppCompatActivity {
         MyDataBaseHelper helper = new MyDataBaseHelper(this);
         SQLiteDatabase db = helper.getWritableDatabase();
 
+
         HistoryMovieDao historyMovieDao = new HistoryMovieDao(db);
         movieHistoryList.addAll(historyMovieDao.getAllHistoryMovies(user.getEmail()));
         Log.d(TAG, "T: "+movieHistoryList);
