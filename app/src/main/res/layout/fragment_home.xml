@@ -30,6 +30,7 @@
 
     </LinearLayout>
     <FrameLayout
+        android:id="@+id/history"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <androidx.cardview.widget.CardView
@@ -44,7 +45,6 @@
             android:id="@+id/slug_movie_home"
             android:layout_width="330dp"
             android:layout_height="174dp"
-            android:src="@drawable/imgtest"
             android:background="@drawable/rounded_corner"
             android:scaleType="centerCrop"
             android:contentDescription="@string/action_user"
@@ -64,6 +64,7 @@
             >
 
             <ImageButton
+                android:id="@+id/play"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:src="@drawable/play"

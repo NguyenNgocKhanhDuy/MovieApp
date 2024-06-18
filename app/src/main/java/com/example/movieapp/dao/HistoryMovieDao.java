@@ -20,9 +20,10 @@ public class HistoryMovieDao {
         this.db = db;
     }
 
-    public void addHistoryMovie(String name, String img, String email) {
+    public void addHistoryMovie(String slug, String name, String img, String email) {
         ContentValues values = new ContentValues();
         values.put("email", email);
+        values.put("slug", slug);
         values.put("name", name);
         values.put("img", img);
         db.insert("HistoryMovie", null, values);
@@ -30,11 +31,13 @@ public class HistoryMovieDao {
 
     public List<MovieDetail> getAllHistoryMovies(String email) {
         List<MovieDetail> movies = new ArrayList<>();
-        Cursor cursor = db.rawQuery("SELECT name, img FROM HistoryMovie WHERE email = ?", new String[]{email});
+        Cursor cursor = db.rawQuery("SELECT slug, name, img FROM HistoryMovie WHERE email = ?", new String[]{email});
         while (cursor.moveToNext()) {
-            String name = cursor.getString(0);
-            String img = cursor.getString(1);
+            String slug = cursor.getString(0);
+            String name = cursor.getString(1);
+            String img = cursor.getString(2);
             MovieDetail movieDetail = new MovieDetail();
+            movieDetail.setSlug(slug);
             movieDetail.setName(name);
             movieDetail.setPosterURL(img);
             movies.add(movieDetail);
